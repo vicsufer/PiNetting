@@ -3,9 +3,9 @@
  -	Chatrooms
  -	Custom logs (Via winston)
  -	MongoDB Persistance (Via mongoose)
- -  Sample frontend (In public/index.html)
+ - Sample frontend (In public/index.html)
 
-# RUN
+# Run
 ```
 npm start
 ```
