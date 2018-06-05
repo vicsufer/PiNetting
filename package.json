@@ -1,0 +1,21 @@
+{
+  "name": "Chat",
+  "version": "0.2.0",
+  "description": "Chat via websockets.",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "NODE_ENV=dev  nodemon ./server/app.js"
+  },
+  "author": "Víctor Suárez Fernández",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.1.4",
+    "socket.io": "^2.1.1",
+    "winston": "^3.0.0-rc5",
+    "winston-loggly-bulk": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}

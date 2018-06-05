@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat with sockets</title>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>Chat</h1>
+
+    <h2>New chatroom</h2>
+    <form onsubmit="return createChatroom(this)">
+      <input type="text" id="newRoomName" placeholder="Chatroom name">
+      <input type="submit" value="Send">
+    </form>
+
+    <h2>Join chatroom</h2>
+    <form onsubmit="return joinChatroom(this)">
+      <input type="text" id="roomName" placeholder="Chatroom name">
+      <input type="submit" value="Send">
+    </form>
+
+    <h2>Sala actual: <spam id='currentRoom'></spam></h2>
+    <div id='messages'></div>
+    <form onsubmit="return addMessage(this)">
+      <input type="text" id="username" placeholder="Author">
+      <input type"text" id="text" placeholder="Message">
+      <input type="submit" value="Send">
+    </form>
+
+
+
+  </body>
+</html>
