@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 const winston = require('winston');
 
 //Winston logger
-const winstonLog= require("./modules/logger.js")
+const winstonLog = require("./modules/logger.js")
 winstonLog.init(winston);
 const logger = winstonLog.logger;
 
@@ -33,10 +33,6 @@ http.listen(app.get('port'), function() {
 });
 
 
-
-
-
-
 io.on('connection', function(socket) {
 
   logger.log({
@@ -47,13 +43,12 @@ io.on('connection', function(socket) {
 
   socket.on('new_chatroom', function(data) {
     var chatroom = chatrooms.filter(x => x.room_name == data.name)[0];
-    if(!chatroom)
-    {
+    if (!chatroom) {
       chatrooms.push(new ChatRoom({
         'room_name': data.name
       }))
       logger.log({
-        level: 'error',
+        level: 'verbose',
         label: 'ChatRoom',
         message: 'Created chatroom: ' + data.name
       });
@@ -78,6 +73,7 @@ io.on('connection', function(socket) {
     var chatroom = chatrooms.filter(x => x.room_name == data.name)[0];
     if (chatroom) {
       socket.chatroom = chatroom;
+      socket.chatroom.meta.current_users += 1;
       logger.log({
         level: 'verbose',
         label: 'ChatRoom',
@@ -88,11 +84,22 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
+    socket.chatroom.meta.current_users -= 1;
     logger.log({
       level: 'verbose',
       label: 'ChatRoom',
       message: 'User disconnected'
     });
+
+    if (socket.chatroom.meta.current_users == 0) {
+      socket.chatroom.save();
+      delete socket.chatroom;
+      logger.log({
+        level: 'verbose',
+        label: 'ChatRoom',
+        message: 'Chatroom persisted'
+      });
+    }
   });
 
 });

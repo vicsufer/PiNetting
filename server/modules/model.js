@@ -16,14 +16,16 @@ module.exports = {
     chatroomSchema = new Schema({
       room_name: String,
       creator: String,
-      messages: []
+      messages: [],
+      meta: {
+        current_users: {type: Number, default: 0}
+      }
     });
 
     //ChatRoom methods
     chatroomSchema.methods.addMessage = function(message)
     {
       this.messages.push(message);
-      this.save();
     }
     ChatRoom = mongoose.model('ChatRoom', chatroomSchema);
 
