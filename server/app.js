@@ -32,6 +32,11 @@ http.listen(app.get('port'), function() {
   });
 });
 
+
+
+
+
+
 io.on('connection', function(socket) {
 
   logger.log({
@@ -57,9 +62,8 @@ io.on('connection', function(socket) {
   })
 
   socket.on('new_message', function(data) {
-    var chatroom = chatrooms.filter(x => x.room_name == data.roomName)[0];
-    if (chatroom) {
-      chatroom.addMessage(new model.Message(data.username, data.text))
+    if (socket.chatroom) {
+      socket.chatroom.addMessage(new model.Message(data.username, data.text))
       io.sockets.emit('messages', chatroom.messages);
       logger.log({
         level: 'silly',
@@ -73,6 +77,7 @@ io.on('connection', function(socket) {
   socket.on('join_chatroom', function(data) {
     var chatroom = chatrooms.filter(x => x.room_name == data.name)[0];
     if (chatroom) {
+      socket.chatroom = chatroom;
       logger.log({
         level: 'verbose',
         label: 'ChatRoom',
