@@ -1,4 +1,4 @@
-
+const util = require('util');
 
 module.exports = {
 
@@ -12,15 +12,19 @@ module.exports = {
       printf
     } = winston.format;
 
-    const myFormat = printf(info => {
-      return `${info.timestamp} [${info.label}] ${info.level} -> ${info.message}`;
+    const consoleFormat = printf(info => {
+      return util.format('%s [%s] %s', info.timestamp.padEnd(20),info.label.padEnd(15), info.message);
+    });
+
+    const jsonFormat = printf(info =>{
+      return `{ 'date':'${info.timestamp}','label':'${info.label}','level':'${info.level}','message':'${info.message}'`;
     });
 
     this.logger = winston.createLogger({
       level: 'info',
       format: combine(
         timestamp(),
-        myFormat
+        jsonFormat
       ),
       transports: [
         new winston.transports.File({
@@ -28,16 +32,17 @@ module.exports = {
           level: 'error'
         }),
         new winston.transports.File({
-          filename: './logs/combined.log'
+          filename: './logs/combined.log',
+          level: 'debug'
         })
       ]
     });
     if (process.env.NODE_ENV !== 'production') {
       this.logger.add(new winston.transports.Console({
-        level: 'verbose',
+        level: 'silly',
         format: combine(
           timestamp(),
-          myFormat
+          consoleFormat
         ),
       }));
     }

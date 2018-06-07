@@ -59,11 +59,11 @@ io.on('connection', function(socket) {
   socket.on('new_message', function(data) {
     if (socket.chatroom) {
       socket.chatroom.addMessage(new model.Message(data.username, data.text))
-      io.sockets.emit('messages', chatroom.messages);
+      io.sockets.emit('messages', socket.chatroom.messages);
       logger.log({
         level: 'silly',
         label: 'Message',
-        message: 'New message at: ' + chatroom.room_name
+        message: 'New message at: ' + socket.chatroom.room_name
       });
     }
 
@@ -93,12 +93,14 @@ io.on('connection', function(socket) {
 
     if (socket.chatroom.meta.current_users == 0) {
       socket.chatroom.save();
-      delete socket.chatroom;
       logger.log({
         level: 'verbose',
         label: 'ChatRoom',
-        message: 'Chatroom persisted'
+        message: `Chatroom ${socket.chatroom.room_name} persisted`
       });
+      socket.chatroom = null;
+      console.log(socket.chatroom);
+      console.log(chatrooms)
     }
   });
 
