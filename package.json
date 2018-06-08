@@ -1,12 +1,16 @@
 {
-  "name": "Chat",
-  "version": "0.2.0",
+  "name": "node-chat",
+  "version": "0.3.0",
   "description": "Chat via websockets.",
   "main": "server/app.js",
   "scripts": {
     "start": "NODE_ENV=dev  nodemon ./server/app.js"
   },
   "author": "Víctor Suárez Fernández",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bordex/node-chat"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
