@@ -16,7 +16,7 @@ mongoose.connection.on('error', console.error.bind(console, 'connection error:')
 
 //model
 var model = require("./modules/model.js");
-model.init(mongoose);
+model.init(mongoose, logger);
 
 app.use(express.static('public'));
 
@@ -33,6 +33,9 @@ http.listen(app.get('port'), function() {
 });
 
 
+
+
+
 io.on('connection', function(socket) {
 
   logger.log({
@@ -43,15 +46,34 @@ io.on('connection', function(socket) {
 
   socket.on('new_chatroom', function(data) {
     var chatroom = chatrooms.filter(x => x.room_name == data.name)[0];
-    if (!chatroom) {
-      chatrooms.push(new ChatRoom({
-        'room_name': data.name
-      }))
+    if (chatroom) {
       logger.log({
         level: 'verbose',
         label: 'ChatRoom',
-        message: 'Created chatroom: ' + data.name
+        message: 'Attempt to recreate a existent chatroom: ' + data.name
       });
+    }
+
+    if (!chatroom) {
+      //If not in memory check in ddbb.
+      ChatRoom.findByName(data.name, function(err, chatroom) {
+        if (!chatroom) {
+          chatrooms.push(new ChatRoom({
+            'room_name': data.name
+          }))
+          logger.log({
+            level: 'verbose',
+            label: 'ChatRoom',
+            message: 'Created chatroom: ' + data.name
+          });
+        } else {
+          logger.log({
+            level: 'verbose',
+            label: 'ChatRoom',
+            message: 'Attempt to recreate a existent chatroom: ' + data.name
+          });
+        }
+      })
     }
 
   })
@@ -60,47 +82,42 @@ io.on('connection', function(socket) {
     if (socket.chatroom) {
       socket.chatroom.addMessage(new model.Message(data.username, data.text))
       io.sockets.emit('messages', socket.chatroom.messages);
-      logger.log({
-        level: 'silly',
-        label: 'Message',
-        message: 'New message at: ' + socket.chatroom.room_name
-      });
     }
 
   })
 
   socket.on('join_chatroom', function(data) {
     var chatroom = chatrooms.filter(x => x.room_name == data.name)[0];
-    if (chatroom) {
-      socket.chatroom = chatroom;
-      socket.chatroom.meta.current_users += 1;
-      logger.log({
-        level: 'verbose',
-        label: 'ChatRoom',
-        message: 'User joined: ' + chatroom.room_name
-      });
+
+    if (!chatroom) {
+      //If not in memory check in ddbb.
+      ChatRoom.findByName(data.name, function(err, chatroom) {
+        if (chatroom) {
+          chatroom.increaseUsers();
+          chatrooms.push(chatroom);
+          socket.chatroom = chatroom;
+          socket.emit('messages', chatroom.messages);
+        }
+      })
+    } else {
+      chatroom.increaseUsers();
       socket.emit('messages', chatroom.messages);
     }
+
+
   });
 
   socket.on('disconnect', function() {
-    socket.chatroom.meta.current_users -= 1;
-    logger.log({
-      level: 'verbose',
-      label: 'ChatRoom',
-      message: 'User disconnected'
-    });
-
+    socket.chatroom.decreaseUsers();
     if (socket.chatroom.meta.current_users == 0) {
       socket.chatroom.save();
+      chatrooms = chatrooms.filter(x => x != socket.chatroom);
       logger.log({
         level: 'verbose',
         label: 'ChatRoom',
         message: `Chatroom ${socket.chatroom.room_name} persisted`
       });
       socket.chatroom = null;
-      console.log(socket.chatroom);
-      console.log(chatrooms)
     }
   });
 
