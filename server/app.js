@@ -108,6 +108,9 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
+    if( socket.currentRoom == null )
+      return;
+
     socket.chatroom.decreaseUsers();
     if (socket.chatroom.meta.current_users == 0) {
       socket.chatroom.save();

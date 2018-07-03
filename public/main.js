@@ -8,6 +8,23 @@ socket.on("messages", function(data) {
   render(data);
 })
 
+function hideChatMenu(e) {
+  var chat = document.getElementById("chat-menu")
+  var login = document.getElementById("login-menu")
+
+  if (document.getElementById("username").value === "")
+    return false
+
+  if (chat.style.display === "none") {
+    chat.style.display = "block";
+    login.style.dislpay = "none";
+  } else {
+    chat.style.display = "none";
+    login.style.display = "block";
+  }
+  return false
+}
+
 function render(data) {
   var html = data.map(function(elem, index) {
     return `<div>
@@ -15,7 +32,7 @@ function render(data) {
             </div>`;
   }).join(" ");
 
-  document.getElementById("currentRoom").innerHTML=currentRoom;
+  document.getElementById("currentRoom").innerHTML = currentRoom;
   document.getElementById('messages').innerHTML = html;
 }
 
