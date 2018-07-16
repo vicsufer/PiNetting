@@ -11,41 +11,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" integrity="sha256-ji09tECORKvr8xB9iCl8DJ8iNMLriDchC1+p+yt1hSs=" crossorigin="anonymous"></script>
   <script src="main.js"></script>
-
   <!-- Latest compiled and minified CSS -->
 </head>
 
 <body>
 
-  <h1 class="text-center">Chat</h1>
+  <h1 class="text-center">Dispositivos de red</h1>
 
   <div id="login-menu" class="container" style="display:block">
     <form onsubmit="return hideChatMenu(this)">
       <input type="text" id="username" placeholder="Username">
       <input type="submit" value="Connect">
-    </form>
-  </div>
-
-  <div id="chat-menu" class="container" style="display:none">
-    <button onclick="return hideChatMenu(this)">Log out</button>
-
-    <h2>New chatroom</h2>
-    <form onsubmit="return createChatroom(this)">
-      <input type="text" id="newRoomName" placeholder="Chatroom name">
-      <input type="submit" value="Send">
-    </form>
-
-    <h2>Join chatroom</h2>
-    <form onsubmit="return joinChatroom(this)">
-      <input type="text" id="roomName" placeholder="Chatroom name">
-      <input type="submit" value="Send">
-    </form>
-
-    <h2>Current room: <spam id='currentRoom'></spam></h2>
-    <div id='messages'></div>
-    <form onsubmit="return addMessage(this)">
-      <input type "text" id="text" placeholder="Message">
-      <input type="submit" value="Send">
     </form>
   </div>
 

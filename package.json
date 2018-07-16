@@ -4,7 +4,7 @@
   "description": "Chat via websockets.",
   "main": "server/app.js",
   "scripts": {
-    "start": "NODE_ENV=dev  nodemon ./server/app.js"
+    "start": "NODE_ENV=dev sudo nodemon ./server/app.js"
   },
   "author": "Víctor Suárez Fernández",
   "repository": {
@@ -13,9 +13,13 @@
   },
   "license": "ISC",
   "dependencies": {
+    "elasticsearch": "^15.1.1",
     "express": "^4.16.3",
+    "libnmap": "^0.4.11",
+    "local-devices": "^1.1.1",
     "mongoose": "^5.1.4",
     "socket.io": "^2.1.1",
+    "swig": "^1.4.2",
     "winston": "^3.0.0-rc5",
     "winston-loggly-bulk": "^2.0.2"
   },
