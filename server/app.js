@@ -57,7 +57,7 @@ var opts = {
     '192.168.0.1-200'
   ]
 };
-nmap.discover(opts, function(err, report) {
+nmap.discover({verbose:true}, function(err, report) {
   if (err) throw new Error(err);
   for (let item in report) {
     console.log(JSON.stringify(report[item], null, 2));
