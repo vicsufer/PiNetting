@@ -60,8 +60,8 @@ var opts = {
 nmap.discover({}, function(err, report) {
   console.log("\n\nREPORT\n\n\n")
   if (err) throw new Error(err);
-  for (let item in report) {
-    console.log(JSON.stringify(report[item], null, 2));
+  for (let item in report.etho0) {
+    console.log(JSON.stringify(report.etho0[item], null, 2));
   }
 });
 setInterval(function() {
