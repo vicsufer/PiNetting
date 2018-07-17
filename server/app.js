@@ -4,7 +4,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 const winston = require('winston');
-var swig = require('swig');
+var engine = require('express-dot-engine');
+var path = require('path');
 
 
 
@@ -16,7 +17,7 @@ const winstonLog = require("./modules/logger.js")
 winstonLog.init(winston);
 const logger = winstonLog.logger;
 
-require("./routes/rhome.js")(app, swig);
+require("./routes/rhome.js")(app);
 require("./routes/rcmd.js")(app, exec);
 /*
 //Network tools
@@ -43,9 +44,28 @@ nmap.scan(opts, function(err, report) {
 app.set('port', 5000);
 
 app.use(express.static('public'));
+app.engine('dot', engine.__express);
+app.set('views', path.join(__dirname, './views'));
+app.set('view engine', 'dot');
 
+app.get('/hola', function(req, res) {
 
-var fs = require('fs');
+  res.render('main', {
+    devices: [{
+        name: "Check",
+        ip: "127.0.0.1",
+        mac: "00-14-22-01-23-45",
+        known: true
+      },
+      {
+        name: "Check 2",
+        ip: "192.168.0.100",
+        mac: "02-80-22-04-31-79",
+        known: false
+      }
+    ]
+  });
+});
 
 /*
 IMRPOVEMENT FOT LINUX -> https://stackoverflow.com/questions/24433580/device-computer-discovery-in-my-network

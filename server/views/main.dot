@@ -3,11 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <title>HOME</title>
+  <title>Gestor de dispositivos</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet" />
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -19,41 +20,49 @@
 
 <body>
 
-  <h1>{{ pagename|title }}</h1>
-  <div id="devices" class="container-fluid">
-    <table class="table table-responsive table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Nombre</th>
-          <th scope="col">IP</th>
-          <th scope="col">MAC</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        [[=devices]]
-        {% for device in devices %}
-        <tr>
-          <td><a href="#" id="device" data-type="text" data-title="Nombre del dispositivo">{{device.name}}</a></td>
-          <td>{{device.ip}}</td>
-          <td>{{device.mac}}</td>
-          <td>
-            {% if device.known %}<i class="fas fa-shield-alt known" onclick="changeType(event)"></i>{% endif %} {% if !device.known %}<i class="fa fa-question unknown" onclick="changeType(event)"></i>{% endif %}
-          </td>
-          <td>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
-              <ul class="dropdown-menu">
-                <li><a onclick="doPing(event)">Ping</a></li>
-                <li><a onclick=""> Guardar</a></li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-        {% endfor %}
+  <h1 class="text-center">Home</h1>
+
+  <div class="container">
+    <h2>Dispositivos conectados</h2>
+    <div id="connected-devices" class="container-fluid">
+      <table class="table table-responsive table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">IP</th>
+            <th scope="col">MAC</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
         <tbody>
-    </table>
+
+          [[ for (var device in model.devices){ ]]
+          <tr id='devices_tr_[[= model.devices[device].mac]]'>
+            <td><a href="#" id="device" data-type="text" data-title="Nombre del dispositivo">[[= model.devices[device].name ]]</a></td>
+            <td>[[= model.devices[device].ip ]]</td>
+            <td>[[= model.devices[device].mac ]]</td>
+            <td>
+              [[? model.devices[device].known ]]<i class="fas fa-shield-alt known" onclick="changeType(event)"></i>[[??]]<i class="fa fa-question unknown" onclick="changeType(event)"></i>[[?]]
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
+                <ul class="dropdown-menu">
+                  <li><a onclick="doPing('[[= model.devices[device].mac]]')">Ping</a></li>
+                  <li><a onclick=""> Guardar</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          [[ } ]]
+          <tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Dispositivos conocidos</h2>
   </div>
 
 </body>

@@ -15,6 +15,7 @@
   "dependencies": {
     "elasticsearch": "^15.1.1",
     "express": "^4.16.3",
+    "express-dot-engine": "^1.0.7",
     "libnmap": "^0.4.11",
     "local-devices": "^1.1.1",
     "mongoose": "^5.1.4",
