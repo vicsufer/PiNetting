@@ -1,11 +1,15 @@
 var express = require('express');
 var app = express();
-var fs = require('fs')
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 const winston = require('winston');
 var swig = require('swig');
+
+
+
+var sys = require('util')
+var exec = require('child_process').exec;
 
 //Winston logger
 const winstonLog = require("./modules/logger.js")
@@ -13,6 +17,7 @@ winstonLog.init(winston);
 const logger = winstonLog.logger;
 
 require("./routes/rhome.js")(app, swig);
+require("./routes/rcmd.js")(app, exec);
 /*
 //Network tools
 const nmap = require('libnmap');
@@ -46,55 +51,43 @@ var fs = require('fs');
 IMRPOVEMENT FOT LINUX -> https://stackoverflow.com/questions/24433580/device-computer-discovery-in-my-network
 */
 
-var nmap = require('libnmap')
-
-
-var devices = [];
-var last_devices = [];
-var opts = {
-  flags: ["-sT", "-O"],
-  range: [
-    '192.168.0.1-200'
-  ]
-};
-
-var fs = require('fs');
-
-fs.readFile('/proc/net/arp', function(err, data) {
-  if (!!err) return done(err, null);
-
-  var output = [];
-  var devices = data.toString().split('\n');
-  devices.splice(0, 1);
-
-  for (i = 0; i < devices.length; i++) {
-    var cols = devices[i].replace(/ [ ]*/g, ' ').split(' ');
-
-    if ((cols.length > 3) && (cols[0].length !== 0) && (cols[3].length !== 0) && cols[3] !== '00:00:00:00:00:00') {
-      output.push({
-        ip: cols[0],
-        mac: cols[3]
-      });
-    }
+function chunkArray(myArray, chunk_size) {
+  var index = 0;
+  var arrayLength = myArray.length;
+  var tempArray = [];
+  for (index = 0; index < arrayLength; index += chunk_size) {
+    myChunk = myArray.slice(index, index + chunk_size);
+    // Do something if you want with the group
+    tempArray.push(myChunk);
   }
-
-  console.log(output);
-});
+  return tempArray;
+}
 
 /*
-nmap.discover({}, function(err, report) {
-  console.log("\n\nREPORT\n\n\n")
-  if (err) throw new Error(err);
-  for (let item in report.etho0) {
-    console.log(JSON.stringify(report.etho0[item], null, 2));
-  }
-});
 setInterval(function() {
-  var last_devices = [];
-}, 60000)
+  var command = "nmap -sP -PR 192.168.0.1/17"
+  var dir = exec(command, function(err, stdout, stderr) {
+    stdout = stdout.split("\n")
+    stdout.shift() //Remove header of the output
+    stdout.pop() //Remove summary
+    stdout = chunkArray(stdout, 3);
+    var devices = []
+    console.log(JSON.stringify(stdout, null, 2))
+
+    stdout.forEach(function(dev) {
+      var device = {
+        ip: dev[0].split("Nmap scan report for ")[1],
+        mac: dev[2].split("MAC Address: ")[1]
+      }
+      devices.push(device)
+    });
+    console.log(JSON.stringify(devices, null, 2))
+    if (stderr) {
+      console.log('exec error: ' + stderr);
+    }
+  });
+}, 5000);
 */
-
-
 
 
 /*
