@@ -45,6 +45,6 @@ function doPing(mac) {
 
 
 $(document).ready(function() {
-  $('#device').editable();
+  $('.device_name').editable();
   $('#modal-ping').modal('hide')
 });

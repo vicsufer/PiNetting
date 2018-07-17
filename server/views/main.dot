@@ -20,7 +20,7 @@
 
 <body>
 
-  <h1 class="text-center">Home</h1>
+  <h1 class="text-center">Gestor Dispositivos</h1>
 
   <div class="container">
     <h2>Dispositivos conectados</h2>
@@ -28,7 +28,7 @@
       <table class="table table-responsive table-hover">
         <thead>
           <tr>
-            <th scope="col">Nombre</th>
+            <th scope="col">Fabricante</th>
             <th scope="col">IP</th>
             <th scope="col">MAC</th>
             <th scope="col">Tipo</th>
@@ -39,7 +39,7 @@
 
           [[ for (var device in model.devices){ ]]
           <tr id='devices_tr_[[= model.devices[device].mac]]'>
-            <td><a href="#" id="device" data-type="text" data-title="Nombre del dispositivo">[[= model.devices[device].name ]]</a></td>
+            <td>[[= model.devices[device].vendor ]]</a></td>
             <td>[[= model.devices[device].ip ]]</td>
             <td>[[= model.devices[device].mac ]]</td>
             <td>
@@ -63,6 +63,32 @@
 
   <div class="container">
     <h2>Dispositivos conocidos</h2>
+    <table class="table table-responsive table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">IP</th>
+          <th scope="col">MAC</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        [[ for (var device in model.devices){ ]]
+        <tr id='devices_tr_[[= model.devices[device].mac]]'>
+          <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">[[= model.devices[device].name ]]</a></td>
+          <td>[[= model.devices[device].ip ]]</td>
+          <td>[[= model.devices[device].mac ]]</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        [[ } ]]
+        <tbody>
+    </table>
   </div>
 
 </body>
