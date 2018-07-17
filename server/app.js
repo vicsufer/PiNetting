@@ -48,27 +48,6 @@ app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'dot');
 
-app.get('/test', function(req, res) {
-
-  res.render('main', {
-    devices: [{
-        vendor: "Samsung Electronics",
-        name: "Check",
-        ip: "127.0.0.1",
-        mac: "00-14-22-01-23-45",
-        known: true
-      },
-      {
-        vendor: "Sony",
-        name: "Check 2",
-        ip: "192.168.0.100",
-        mac: "02-80-22-04-31-79",
-        known: false
-      }
-    ]
-  });
-});
-
 /*
 IMRPOVEMENT FOT LINUX -> https://stackoverflow.com/questions/24433580/device-computer-discovery-in-my-network
 */
@@ -85,31 +64,37 @@ function chunkArray(myArray, chunk_size) {
   return tempArray;
 }
 
-/*
+
 setInterval(function() {
   var command = "nmap -sP -PR 192.168.0.1/17"
   var dir = exec(command, function(err, stdout, stderr) {
+
     stdout = stdout.split("\n")
     stdout.shift() //Remove header of the output
     stdout.pop() //Remove summary
     stdout = chunkArray(stdout, 3);
+    //Last one is localhost, we don't need that one.
+    stdout.pop()
     var devices = []
-    console.log(JSON.stringify(stdout, null, 2))
+
 
     stdout.forEach(function(dev) {
+
       var device = {
         ip: dev[0].split("Nmap scan report for ")[1],
-        mac: dev[2].split("MAC Address: ")[1]
+        mac: dev[2].split("MAC Address: ")[1].split(" ",1)[0],
+        vendor: dev[2].split("MAC Address: ")[1].split(" ",2)[1].replace("(", "").replace(")","")
       }
-      devices.push(device)
+      devices.push(device);
     });
     console.log(JSON.stringify(devices, null, 2))
     if (stderr) {
       console.log('exec error: ' + stderr);
     }
+
   });
 }, 5000);
-*/
+
 
 
 /*
