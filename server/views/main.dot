@@ -24,7 +24,7 @@
 
   <div class="container">
     <h2>Dispositivos conectados</h2>
-    <div id="connected-devices" class="container-fluid">
+    <div class="container-fluid">
       <table class="table table-responsive table-hover">
         <thead>
           <tr>
@@ -35,7 +35,7 @@
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="connected-devices">
 
           [[ for (var device in model.devices){ ]]
           <tr id='devices_tr_[[= model.devices[device].mac]]'>

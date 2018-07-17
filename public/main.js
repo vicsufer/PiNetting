@@ -2,10 +2,36 @@ var socket = io.connect("http://localhost:5000", {
   'forceNew': true
 });
 
-function editName() {
-  var source = event.target || event.srcElement;
-  alert($(source).parent().html())
-}
+socket.on('disconnected_devices', function(data) {
+  data.forEach(function(mac) {
+    $("tr[id='devices_tr_" + mac + "']").remove();
+  })
+
+});
+
+socket.on('connected_devices', function(data) {
+  data.forEach(function(device) {
+    var str = `<tr id='devices_tr_${device.mac}'>
+        <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">${device.vendor}</a></td>
+        <td>${device.ip}</td>
+        <td>${device.mac}</td>
+        <td>
+        </td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
+            <ul class="dropdown-menu">
+              <li><a onclick="doPing('${device.ip}')">Ping</a></li>
+              <li><a onclick="register('${device.mac}')"> Guardar</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>`
+    $("#connected-devices").append(str)
+  })
+
+});
+
 
 function changeType(e) {
   var e = window.event || e;
@@ -18,8 +44,32 @@ function changeType(e) {
   }
 }
 
+
+function register(mac) {
+  device = {
+    ip: $("#devices_tr_" + mac).children().eq(1).html(),
+    mac: $("#devices_tr_" + mac).children().eq(2).html(),
+    vendor: $("#devices_tr_" + mac).children().eq(0).html()
+  }
+  var settings = {
+    "async": true,
+    "url": "/ping",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/x-www-form-urlencoded"
+    },
+    "data": device
+  }
+
+  $.ajax(settings).done(function(response) {
+
+  });
+
+
+}
+
 function doPing(mac) {
-  ip = $("#devices_tr_"+mac).children().eq(1).html();
+  ip = $("#devices_tr_" + mac).children().eq(1).html();
   var settings = {
     "async": true,
     "url": "/ping",
@@ -37,10 +87,10 @@ function doPing(mac) {
     $('#ping_max').html(response.max)
     $('#ping_avg').html(response.avg)
     $('#modal-ping').modal('show')
-    $("#devices_tr_"+mac+" td button i").attr("class", "fas fa-caret-down")
+    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
   });
 
-  $("#devices_tr_"+mac+" td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
+  $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
 }
 
 

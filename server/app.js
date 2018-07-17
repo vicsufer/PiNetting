@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
 const winston = require('winston');
 var engine = require('express-dot-engine');
 var path = require('path');
@@ -10,15 +10,23 @@ var path = require('path');
 
 
 var sys = require('util')
-var exec = require('child_process').exec;
+var child_process = require('child_process'); //Cada llamada a exec crea un proceso nuevo o lo pone en cola????
 
 //Winston logger
 const winstonLog = require("./modules/logger.js")
 winstonLog.init(winston);
 const logger = winstonLog.logger;
 
+MongoClient.connect("mongodb://localhost:27017/network_devices", function(err, db) {
+  if (!err) {
+    console.log("Connected correctly to server");
+    app.set('db', db)
+  }
+});
+
+
 require("./routes/rhome.js")(app);
-require("./routes/rcmd.js")(app, exec);
+require("./routes/rcmd.js")(app, child_process, io);
 /*
 //Network tools
 const nmap = require('libnmap');
@@ -42,60 +50,12 @@ nmap.scan(opts, function(err, report) {
 
 //Variables
 app.set('port', 5000);
+app.set('devices', []);
 
 app.use(express.static('public'));
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'dot');
-
-/*
-IMRPOVEMENT FOT LINUX -> https://stackoverflow.com/questions/24433580/device-computer-discovery-in-my-network
-*/
-
-function chunkArray(myArray, chunk_size) {
-  var index = 0;
-  var arrayLength = myArray.length;
-  var tempArray = [];
-  for (index = 0; index < arrayLength; index += chunk_size) {
-    myChunk = myArray.slice(index, index + chunk_size);
-    // Do something if you want with the group
-    tempArray.push(myChunk);
-  }
-  return tempArray;
-}
-
-
-setInterval(function() {
-  var command = "nmap -sP -PR 192.168.0.1/17"
-  var dir = exec(command, function(err, stdout, stderr) {
-
-    stdout = stdout.split("\n")
-    stdout.shift() //Remove header of the output
-    stdout.pop() //Remove summary
-    stdout = chunkArray(stdout, 3);
-    //Last one is localhost, we don't need that one.
-    stdout.pop()
-    var devices = []
-
-
-    stdout.forEach(function(dev) {
-
-      var device = {
-        ip: dev[0].split("Nmap scan report for ")[1],
-        mac: dev[2].split("MAC Address: ")[1].split(" ",1)[0],
-        vendor: dev[2].split("MAC Address: ")[1].split(" ",2)[1].replace("(", "").replace(")","")
-      }
-      devices.push(device);
-    });
-    console.log(JSON.stringify(devices, null, 2))
-    if (stderr) {
-      console.log('exec error: ' + stderr);
-    }
-
-  });
-}, 5000);
-
-
 
 /*
 //Elasticserach
@@ -168,8 +128,8 @@ http.listen(app.get('port'), function() {
   });
 });
 
-io.on('connection', function(socket) {
 
+io.on('connection', function(socket) {
   logger.log({
     level: "verbose",
     label: 'Connection',
