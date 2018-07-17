@@ -48,7 +48,7 @@ app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'dot');
 
-app.get('/hola', function(req, res) {
+app.get('/', function(req, res) {
 
   res.render('main', {
     devices: [{
