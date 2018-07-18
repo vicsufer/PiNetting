@@ -92,8 +92,9 @@
     </table>
   </div>
 
+
   <!-- Footer -->
-  <footer class="page-footer font-small .bg-secondary pt-4">
+  <footer class="page-footer font-small pt-4">
 
     <!-- Footer Elements -->
     <div class="container">
@@ -102,13 +103,13 @@
       <ul class="list-unstyled list-inline text-center">
         <li class="list-inline-item">
           <a hred="https://twitter.com/vicbordex" class="btn-floating btn-tw mx-1">
-            <i class="fa fa-twitter"> </i>
-          </a>
+              <i class="fab fa-twitter fa-3x"> </i>
+            </a>
         </li>
         <li class="list-inline-item">
           <a hred="https://www.linkedin.com/in/vicsufer/" class="btn-floating btn-li mx-1">
-            <i class="fa fa-linkedin"> </i>
-          </a>
+              <i class="fab fa-linkedin fa-3x"> </i>
+            </a>
         </li>
       </ul>
       <!-- Social buttons -->
@@ -117,14 +118,13 @@
     <!-- Footer Elements -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <div class="footer-copyright text-center py-3">© 2018:
       <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Víctor Suárez Fernández</a>
     </div>
     <!-- Copyright -->
 
   </footer>
   <!-- Footer -->
-
 </body>
 
 
