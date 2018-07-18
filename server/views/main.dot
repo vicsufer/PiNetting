@@ -39,7 +39,8 @@
 
           [[ for (var device in model.devices){ ]]
           <tr id='devices_tr_[[= model.devices[device].mac]]'>
-            <td>[[= model.devices[device].vendor ]]</a></td>
+            <td>[[= model.devices[device].vendor ]]</a>
+            </td>
             <td>[[= model.devices[device].ip ]]</td>
             <td>[[= model.devices[device].mac ]]</td>
             <td>
@@ -90,6 +91,39 @@
         <tbody>
     </table>
   </div>
+
+  <!-- Footer -->
+  <footer class="page-footer font-small .bg-secondary pt-4">
+
+    <!-- Footer Elements -->
+    <div class="container">
+
+      <!-- Social buttons -->
+      <ul class="list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+          <a hred="https://twitter.com/vicbordex" class="btn-floating btn-tw mx-1">
+            <i class="fa fa-twitter"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a hred="https://www.linkedin.com/in/vicsufer/" class="btn-floating btn-li mx-1">
+            <i class="fa fa-linkedin"> </i>
+          </a>
+        </li>
+      </ul>
+      <!-- Social buttons -->
+
+    </div>
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Víctor Suárez Fernández</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
 
 </body>
 
