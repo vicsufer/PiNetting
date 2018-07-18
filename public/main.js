@@ -68,8 +68,7 @@ function register(mac) {
 
 }
 
-function doPing(mac) {
-  ip = $("#devices_tr_" + mac).children().eq(1).html();
+function doPing(ip) {
   var settings = {
     "async": true,
     "url": "/ping",
@@ -87,10 +86,10 @@ function doPing(mac) {
     $('#ping_max').html(response.max)
     $('#ping_avg').html(response.avg)
     $('#modal-ping').modal('show')
-    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
+    //$("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
   });
 
-  $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
+  //$("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
 }
 
 
