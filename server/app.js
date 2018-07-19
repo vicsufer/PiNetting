@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -16,6 +17,8 @@ app.use(function(req, res, next) {
   // Debemos especificar todas las headers que se aceptan. Content-Type , token
   next();
 });
+
+app.use(bodyParser.json());
 
 //mongodb
 var gestorBD = require("./modules/gestorBD.js");
