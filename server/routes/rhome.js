@@ -6,7 +6,6 @@ module.exports = function(app, gestorBD) {
     gestorBD.getRegisteredDevices({}, function(err, registered_devices) {
       if (err) {
         res.render('main', {
-          ip: ,
           devices: app.get("devices"),
           registered_devices: []
         });
