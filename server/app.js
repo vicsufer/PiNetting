@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 //mongodb
 var gestorBD = require("./modules/gestorBD.js");
 app.set('db', 'mongodb://localhost:27017/network_devices');
+gestorBD.init(app, mongo);
 
 //Winston logger
 const winstonLog = require("./modules/logger.js")
