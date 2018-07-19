@@ -12,7 +12,7 @@ module.exports = {
         funcionCallback(err);
       } else {
         var collection = db.collection('registered_devices');
-        collection.insert(devices, function(err, result) {
+        collection.insert(device, function(err, result) {
           if (err) {
             funcionCallback(err);
           } else {
