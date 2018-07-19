@@ -50,10 +50,20 @@ module.exports = function(app, gestorBD) {
       name: req.body.name,
       mac: req.body.pk
     }
-    res.status(200)
-    res.send({
-      message: "OK"
+    gestorBD.updateRegisteredDevice(device, function(err, response) {
+      if (err) {
+        res.status(500)
+        res.send({
+          message: "Can't update name"
+        })
+      } else {
+        res.status(200)
+        res.send({
+          message: "OK"
+        })
+      }
     })
+
   });
 
 }
