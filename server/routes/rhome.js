@@ -45,14 +45,15 @@ module.exports = function(app, gestorBD) {
   });
 
   //POST
-  app.post('/rename', function(req, res){
-    console.log(json.stringify(req.body, null, 2))
+  app.post('/rename', function(req, res) {
     device = {
       name: req.body.name,
       mac: req.body.pk
     }
     res.status(200)
-    res.send({message:"OK"})
+    res.send({
+      message: "OK"
+    })
   });
 
 }
