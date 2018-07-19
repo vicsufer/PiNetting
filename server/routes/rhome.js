@@ -49,20 +49,8 @@ module.exports = function(app, gestorBD) {
       name: req.body.name,
       mac: req.body.pk
     }
-    gestorBD.registerDevice(device, function(err, result) {
-      if (err) {
-        res.status(500)
-        res.send({
-          message: "Unable to register"
-        })
-      } else {
-        res.status(200)
-        res.send({
-          message: "OK"
-        })
-      }
-    })
-
+    res.status(200)
+    res.send({message:"OK"})
   });
 
 }
