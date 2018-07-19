@@ -9,14 +9,14 @@ module.exports = {
   registerDevice: function(device, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
       if (err) {
-        funcionCallback(null);
+        funcionCallback(err);
       } else {
         var collection = db.collection('registered_devices');
         collection.insert(devices, function(err, result) {
           if (err) {
-            funcionCallback(null);
+            funcionCallback(err);
           } else {
-            funcionCallback(result.ops[0]._id);
+            funcionCallback(null, result.ops[0]._id);
           }
           db.close();
         });
@@ -27,15 +27,15 @@ module.exports = {
   getRegisteredDevices: function(criterio, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
       if (err) {
-        funcionCallback(null);
+        funcionCallback(err);
       } else {
         var collection = db.collection('registered_devices');
         collection.find(criterio)
           .toArray(function(err, devices) {
             if (err) {
-              funcionCallback(null);
+              funcionCallback(err);
             } else {
-              funcionCallback(devices);
+              funcionCallback(null,devices);
             }
             db.close();
           });

@@ -19,7 +19,7 @@
     "express-dot-engine": "^1.0.7",
     "libnmap": "^0.4.11",
     "local-devices": "^1.1.1",
-    "mongodb": "^3.1.1",
+    "mongodb": "^2.2.33",
     "socket.io": "^2.1.1",
     "swig": "^1.4.2",
     "winston": "^3.0.0-rc5",
