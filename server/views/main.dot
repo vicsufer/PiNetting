@@ -51,7 +51,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
                 <ul class="dropdown-menu">
                   <li><a onclick="doPing('[[= model.devices[device].mac]]')">Ping</a></li>
-                  <li><a onclick=""> Guardar</a></li>
+                  <li><a onclick="register('[[= model.devices[device].mac]]')"> Guardar</a></li>
                 </ul>
               </div>
             </td>
