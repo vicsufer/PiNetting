@@ -50,21 +50,11 @@ function register(mac, vendor) {
     mac: mac,
     vendor: vendor
   }
-  var settings = {
-    "async": true,
-    "url": "/register",
-    "method": "POST",
-    "headers": {
-      "content-type": "application/x-www-form-urlencoded"
-    },
-    "data": device
-  }
-
-  $.ajax(settings).done(function(response) {
-    console.log(response)
-  });
-
-
+  $.post("/register", device,
+    function(response) {
+      console.log(response)
+    }
+  );
 }
 
 function doPing(ip) {
