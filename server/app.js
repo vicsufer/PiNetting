@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongo = require('mongodb')
@@ -20,7 +23,6 @@ app.use(function(req, res, next) {
 });
 
 
-app.use(bodyParser.json());
 
 //mongodb
 var gestorBD = require("./modules/gestorBD.js");

@@ -48,7 +48,7 @@ function changeType(e) {
 function register(mac, vendor) {
   $.ajax({
     url: '/register',
-    type: "POST"
+    type: "POST",
     dataType: 'json',
     data: {
       mac: mac,
