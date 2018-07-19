@@ -77,8 +77,8 @@
         [[ for (var device in model.registered_devices){ ]]
         <tr id='devices_tr_[[= model.registered_devices[device].mac]]'>
           <td><a href="#" data-pk="[[=model.registered_devices[device].mac]]" name="name" class="device_name" data-type="text" data-url="/rename" data-title="Nombre del dispositivo">[[= model.registered_devices[device].name ]]</a></td>
-          <td>[[= model.devices[device].ip ]]</td>
-          <td>[[= model.devices[device].mac ]]</td>
+          <td>[[= model.registered_devices[device].ip ]]</td>
+          <td>[[= model.registered_devices[device].mac ]]</td>
           <td>
             <label class="switch">
               <input type="checkbox">
