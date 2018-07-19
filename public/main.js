@@ -22,7 +22,7 @@ socket.on('connected_devices', function(data) {
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
             <ul class="dropdown-menu">
               <li><a onclick="doPing('${device.ip}')">Ping</a></li>
-              <li><a onclick="register('${device.mac}')"> Guardar</a></li>
+              <li><a onclick="register('${device.mac}','${device.vendor}')"> Guardar</a></li>
             </ul>
           </div>
         </td>
@@ -45,11 +45,10 @@ function changeType(e) {
 }
 
 
-function register(mac) {
+function register(mac, vendor) {
   device = {
-    ip: $("#devices_tr_" + mac).children().eq(1).html(),
-    mac: $("#devices_tr_" + mac).children().eq(2).html(),
-    vendor: $("#devices_tr_" + mac).children().eq(0).html()
+    mac: mac,
+    vendor: vendor
   }
   var settings = {
     "async": true,
