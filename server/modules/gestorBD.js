@@ -24,13 +24,13 @@ module.exports = {
     });
   },
 
-  updateRegisteredDevice: function(device, funcionCallback) {
+  updateRegisteredDevice: function(criteria, device, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
       if (err) {
         funcionCallback(err);
       } else {
         var collection = db.collection('registered_devices');
-        collection.update(device, function(err, result) {
+        collection.update(criteria, device, function(err, result) {
           if (err) {
             funcionCallback(err);
           } else {
