@@ -49,7 +49,6 @@ function register(mac, vendor) {
   $.ajax({
     url: '/register',
     type: "POST",
-    dataType: 'json',
     data: {
       mac: mac,
       vendor: vendor

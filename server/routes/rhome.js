@@ -21,6 +21,7 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/register', function(req, res) {
+    console.log(req)
     console.log(req.body)
     device = {
       name: req.body.vendor,
