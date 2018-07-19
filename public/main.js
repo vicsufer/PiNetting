@@ -46,12 +46,10 @@ function changeType(e) {
 
 
 function register(mac, vendor) {
-  var device = {
-    mac: mac,
-    vendor: vendor
-  }
-  console.log(device)
-  $.post("/register", device,
+  $.post("/register", {
+      mac: mac,
+      vendor: vendor
+    },
     function(response) {
       console.log(response)
     }
