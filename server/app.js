@@ -30,7 +30,7 @@ const winstonLog = require("./modules/logger.js")
 winstonLog.init(winston);
 const logger = winstonLog.logger;
 
-require("./routes/rhome.js")(app);
+require("./routes/rhome.js")(app, gestorBD);
 require("./routes/rcmd.js")(app, child_process, io, gestorBD);
 /*
 //Network tools
