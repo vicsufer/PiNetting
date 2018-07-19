@@ -49,7 +49,9 @@ module.exports = function(app, gestorBD) {
     gestorBD.updateRegisteredDevice({
       mac: req.body.pk
     }, {
-      name: req.body.name
+      $set: {
+        name: req.body.name
+      }
     }, function(err, response) {
       if (err) {
         res.status(500)
