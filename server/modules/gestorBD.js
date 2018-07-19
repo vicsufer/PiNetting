@@ -24,7 +24,7 @@ module.exports = {
     });
   },
 
-  updateRegisterDevice: function(device, funcionCallback) {
+  updateRegisteredDevice: function(device, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
       if (err) {
         funcionCallback(err);
