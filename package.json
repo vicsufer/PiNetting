@@ -13,6 +13,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "elasticsearch": "^15.1.1",
     "express": "^4.16.3",
     "express-dot-engine": "^1.0.7",

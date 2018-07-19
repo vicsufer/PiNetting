@@ -9,7 +9,6 @@ module.exports = function(app, swig, gestorBD) {
 
   //POSt
   app.post('/register', function(req, res) {
-
     device = {
       name: req.body.vendor,
       ip: req.body.ip,
