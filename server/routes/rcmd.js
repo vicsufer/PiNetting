@@ -30,12 +30,6 @@ module.exports = function(app, child_process, io, gestorBD) {
     }
   });
 
-  //POST
-  app.get('/register', function(req, res) {
-
-  });
-
-
   setInterval(function() {
     var command = "sudo nmap -sP -PR -n --max-retries 4 192.168.0.1/24"
     var dir = child_process.exec(command, function(err, stdout, stderr) {

@@ -1,4 +1,4 @@
-module.exports = function(app, swig) {
+module.exports = function(app, swig, gestorBD) {
 
   //GET
   app.get('/', function(req, res) {
@@ -7,17 +7,29 @@ module.exports = function(app, swig) {
     });
   });
 
-  //GET
+  //POSt
   app.post('/register', function(req, res) {
 
-    device={
-      name:req.body.vendor,
+    device = {
+      name: req.body.vendor,
       ip: req.body.ip,
       mac: req.body.mac,
     }
-    var collection = db.collection("registered_devices");
-    collection.insert(device);
-    res.send({state:'ok'})
+
+    gestorBD.registerDevice(device, function(err, result) {
+      if (err) {
+        res.status(500)
+        res.send({
+          message: "Unable to register"
+        })
+      } else {
+        res.status(200)
+        res.send({
+          message: "OK"
+        })
+      }
+    })
+
   });
 
 }
