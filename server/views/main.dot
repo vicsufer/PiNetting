@@ -49,7 +49,7 @@
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
                 <ul class="dropdown-menu">
-                  <li><a onclick="doPing('[[= model.devices[device].mac]]')">Ping</a></li>
+                  <li><a onclick="doPing('[[= model.devices[device].ip]]')">Ping</a></li>
                   <li><a onclick="register('[[= model.devices[device].mac]]','[[= model.devices[device].vendor]]')"> Guardar</a></li>
                 </ul>
               </div>

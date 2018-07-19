@@ -6,6 +6,7 @@ module.exports = function(app, gestorBD) {
     gestorBD.getRegisteredDevices({}, function(err, registered_devices) {
       if (err) {
         res.render('main', {
+          ip: ,
           devices: app.get("devices"),
           registered_devices: []
         });
@@ -21,6 +22,7 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/register', function(req, res) {
+    console.log(req.body)
     device = {
       name: req.body.vendor,
       mac: req.body.mac,
