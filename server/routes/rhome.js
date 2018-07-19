@@ -46,12 +46,11 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/rename', function(req, res) {
-    device = {
-      name: req.body.name,
+    gestorBD.updateRegisteredDevice({
       mac: req.body.pk
-    }
-    console.log(device)
-    gestorBD.updateRegisteredDevice(device, function(err, response) {
+    }, {
+      name: req.body.name
+    }, function(err, response) {
       if (err) {
         res.status(500)
         res.send({
