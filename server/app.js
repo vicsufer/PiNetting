@@ -2,31 +2,32 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var MongoClient = require('mongodb').MongoClient;
+var mongo = require('mongodb')
 const winston = require('winston');
 var engine = require('express-dot-engine');
 var path = require('path');
-
-
-
 var sys = require('util')
 var child_process = require('child_process'); //Cada llamada a exec crea un proceso nuevo o lo pone en cola????
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "POST, GET, DELETE, UPDATE, PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, token");
+  // Debemos especificar todas las headers que se aceptan. Content-Type , token
+  next();
+});
+
+//mongodb
+var gestorBD = require("./modules/gestorBD.js");
+app.set('db', 'mongodb://localhost:27017/network_devices');
 
 //Winston logger
 const winstonLog = require("./modules/logger.js")
 winstonLog.init(winston);
 const logger = winstonLog.logger;
 
-MongoClient.connect("mongodb://localhost:27017/network_devices", function(err, db) {
-  if (!err) {
-    console.log("Connected correctly to server");
-    app.set('db', db)
-  }
-});
-
-
 require("./routes/rhome.js")(app);
-require("./routes/rcmd.js")(app, child_process, io);
+require("./routes/rcmd.js")(app, child_process, io, gestorBD);
 /*
 //Network tools
 const nmap = require('libnmap');

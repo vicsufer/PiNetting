@@ -19,7 +19,6 @@
     "libnmap": "^0.4.11",
     "local-devices": "^1.1.1",
     "mongodb": "^3.1.1",
-    "mongoose": "^5.1.4",
     "socket.io": "^2.1.1",
     "swig": "^1.4.2",
     "winston": "^3.0.0-rc5",

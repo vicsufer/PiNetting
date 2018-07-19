@@ -1,4 +1,4 @@
-module.exports = function(app, child_process, io) {
+module.exports = function(app, child_process, io, gestorBD) {
 
   //GET
   app.get('/ping', function(req, res) {
@@ -28,6 +28,11 @@ module.exports = function(app, child_process, io) {
         message: "Invalid IP address format"
       })
     }
+  });
+
+  //POST
+  app.get('/register', function(req, res) {
+
   });
 
 
