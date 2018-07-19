@@ -21,8 +21,6 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/register', function(req, res) {
-    console.log(req)
-    console.log(req.body)
     device = {
       name: req.body.vendor,
       mac: req.body.mac,
@@ -46,6 +44,8 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/rename', function(req, res) {
+    console.log(req.body.pk)
+    console.log(req.body.name)
     gestorBD.updateRegisteredDevice({
       mac: req.body.pk
     }, {
