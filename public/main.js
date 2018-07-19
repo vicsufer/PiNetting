@@ -46,14 +46,21 @@ function changeType(e) {
 
 
 function register(mac, vendor) {
-  $.post("/register", {
+  $.ajax({
+    url: '/register',
+    type: "POST"
+    dataType: 'json',
+    data: {
       mac: mac,
       vendor: vendor
     },
-    function(response) {
-      console.log(response)
+    success: function(result) {
+      console.log(result);
+    },
+    error: function(xhr, resp, text) {
+      console.log(xhr, resp, text);
     }
-  );
+  })
 }
 
 function doPing(ip) {
