@@ -9,6 +9,7 @@ var engine = require('express-dot-engine');
 var path = require('path');
 var sys = require('util')
 var child_process = require('child_process'); //Cada llamada a exec crea un proceso nuevo o lo pone en cola????
+/*
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
@@ -17,6 +18,7 @@ app.use(function(req, res, next) {
   // Debemos especificar todas las headers que se aceptan. Content-Type , token
   next();
 });
+*/
 
 app.use(bodyParser.json());
 
