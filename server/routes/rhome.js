@@ -2,9 +2,21 @@ module.exports = function(app, gestorBD) {
 
   //GET
   app.get('/', function(req, res) {
-    res.render('main', {
-      devices: app.get("devices")
-    });
+
+    gestorBD.getRegisteredDevices({}, function(err, registered_devices) {
+      if (err) {
+        res.render('main', {
+          devices: app.get("devices"),
+          registered_devices: []
+        });
+      } else {
+        res.render('main', {
+          devices: app.get("devices"),
+          registered_devices: registered_devices
+        });
+      }
+    })
+
   });
 
   //POSt

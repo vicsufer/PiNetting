@@ -75,7 +75,7 @@
       </thead>
       <tbody>
 
-        [[ for (var device in model.devices){ ]]
+        [[ for (var device in model.registered_devices){ ]]
         <tr id='devices_tr_[[= model.devices[device].mac]]'>
           <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">[[= model.devices[device].name ]]</a></td>
           <td>[[= model.devices[device].ip ]]</td>
