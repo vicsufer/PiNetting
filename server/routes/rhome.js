@@ -19,14 +19,36 @@ module.exports = function(app, gestorBD) {
 
   });
 
-  //POSt
+  //POST
   app.post('/register', function(req, res) {
     device = {
       name: req.body.vendor,
-      ip: req.body.ip,
       mac: req.body.mac,
     }
 
+    gestorBD.registerDevice(device, function(err, result) {
+      if (err) {
+        res.status(500)
+        res.send({
+          message: "Unable to register"
+        })
+      } else {
+        res.status(200)
+        res.send({
+          message: "OK"
+        })
+      }
+    })
+
+  });
+
+  //POST
+  app.post('/rename', function(req, res){
+    console.log(json.stringify(req.body, null, 2))
+    device = {
+      name: req.body.name,
+      mac: req.body.pk
+    }
     gestorBD.registerDevice(device, function(err, result) {
       if (err) {
         res.status(500)
