@@ -53,7 +53,7 @@ function register(mac) {
   }
   var settings = {
     "async": true,
-    "url": "/ping",
+    "url": "/register",
     "method": "POST",
     "headers": {
       "content-type": "application/x-www-form-urlencoded"
@@ -62,7 +62,7 @@ function register(mac) {
   }
 
   $.ajax(settings).done(function(response) {
-
+    console.log(response)
   });
 
 
