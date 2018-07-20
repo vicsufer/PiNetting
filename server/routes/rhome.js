@@ -71,7 +71,7 @@ module.exports = function(app, gestorBD) {
       mac: req.body.mac,
     }
 
-    gestorBD.registerDevice(device, function(err, result) {
+    gestorBD.unregisterDevice(device, function(err, result) {
       if (err) {
         res.status(500)
         res.send({
