@@ -22,7 +22,8 @@ socket.on('connected_devices', function(data) {
         <td>${device.mac}</td>
         <td>`
         //Check if it is a registered device to place corresponding icon.
-        +("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0) ? "<i class='fas fa-shield-alt'></i>" : "<i class='fas fa-exclamation-triangle'></i>" +
+        +
+        ("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0 ? "<i class='fas fa-shield-alt'></i>" : "<i class='fas fa-exclamation-triangle'></i>") +
     `</td>
         <td>
           <div class="dropdown">
