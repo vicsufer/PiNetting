@@ -6,15 +6,15 @@ socket.on('disconnected_devices', function(data) {
   data.forEach(function(mac) {
     //Remove device from connected devices table
     $("#connected-devices tr[id='devices_tr_" + mac + "']").remove();
-    //If it is regiseres set the switch off.
+    //If it is regiseres set the switch off and delete the IP
     $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', false)
+    $("#registered-devices tr[id='devices_tr_" + mac + "'] td")[1].html("")
   })
 
 });
 
 socket.on('connected_devices', function(data) {
   data.forEach(function(device) {
-    var mac = device.mac
     //Create HTML code for new connected device
     var str = `<tr id='devices_tr_${device.mac}'>
         <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">${device.vendor}</a></td>
@@ -33,8 +33,9 @@ socket.on('connected_devices', function(data) {
         </td>
       </tr>`
     $("#connected-devices").append(str)
-    //If the device is registered set the switch on
-    $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
+    //If the device is registered set the switch on and the IP
+    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true)
+    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] td")[1].html( device.ip )
   })
 
 });
@@ -43,7 +44,6 @@ socket.on('connected_devices', function(data) {
 function changeType(e) {
   var e = window.event || e;
   var source = e.target || e.srcElement
-
   if ($(source).attr('class').indexOf("unknown") >= 0) {
     $(source).attr('class', "fas fa-shield-alt known")
   } else {

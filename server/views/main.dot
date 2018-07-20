@@ -22,6 +22,36 @@
   <h1 class="text-center">Gestor Dispositivos</h1>
 
   <div class="container">
+    <h2>Dispositivos registrados</h2>
+    <table id="registered-devices" class="table table-responsive table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">IP</th>
+          <th scope="col">MAC</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        [[ for (var device in model.registered_devices){ ]]
+        <tr id='devices_tr_[[= model.registered_devices[device].mac]]'>
+          <td><a href="#" data-pk="[[=model.registered_devices[device].mac]]" class="device_name" data-type="text" data-url="/rename" data-title="Nombre del dispositivo">[[= model.registered_devices[device].name ]]</a></td>
+          <td>[[= model.registered_devices[device].ip ]]</td>
+          <td>[[= model.registered_devices[device].mac ]]</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        [[ } ]]
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
     <h2>Dispositivos conectados</h2>
     <div class="container-fluid">
       <table id="connected-devices" class="table table-responsive table-hover">
@@ -59,36 +89,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-
-  <div class="container">
-    <h2>Dispositivos registrados</h2>
-    <table id="registered-devices" class="table table-responsive table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Nombre</th>
-          <th scope="col">IP</th>
-          <th scope="col">MAC</th>
-          <th scope="col">Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        [[ for (var device in model.registered_devices){ ]]
-        <tr id='devices_tr_[[= model.registered_devices[device].mac]]'>
-          <td><a href="#" data-pk="[[=model.registered_devices[device].mac]]" class="device_name" data-type="text" data-url="/rename" data-title="Nombre del dispositivo">[[= model.registered_devices[device].name ]]</a></td>
-          <td>[[= model.registered_devices[device].ip ]]</td>
-          <td>[[= model.registered_devices[device].mac ]]</td>
-          <td>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </td>
-        </tr>
-        [[ } ]]
-      </tbody>
-    </table>
   </div>
 
 
