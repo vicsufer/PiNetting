@@ -42,7 +42,7 @@
           <td>
             <label class="switch">
               <input type="checkbox"/>
-              <a onclick= onclick="switch_device('[[=model.registered_devices[device].mac]','[[=model.registered_devices[device].ip]')"><span class="slider round"></span></a>
+              <a onclick= onclick="switch_device('[[=model.registered_devices[device].mac]')"><span class="slider round"></span></a>
             </label>
           </td>
         </tr>

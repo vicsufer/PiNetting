@@ -41,10 +41,11 @@ socket.on('connected_devices', function(data) {
 });
 
 
-function switch_device(mac, ip) {
-
-  if ($('#registered-devices tr[id=' + devices_tr_ " + mac + "
-      '] input[type="checkbox"]').is(":checked")) {
+function switch_device(mac) {
+  var ip = $('#registered-devices tr[id=devices_tr_' + mac + "'] td").eq(1).html()
+  
+  if ($('#registered-devices tr[id=devices_tr_' + mac + "'] input[type='checkbox']").is(':checked')) {
+    $('#fip').val(ip)
     $('#modal-shutdown').modal('show')
   } else {
     wakeup(mac)
