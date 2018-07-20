@@ -15,16 +15,13 @@ socket.on('disconnected_devices', function(data) {
 
 socket.on('connected_devices', function(data) {
   data.forEach(function(device) {
-      //Create HTML code for new connected device
-      var str = `<tr id='devices_tr_${device.mac}'>
+    //Create HTML code for new connected device
+    var faicon = ($("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0 ? "<i class='fas fa-shield-alt'></i>" : "<i class='fas fa-exclamation-triangle'></i>")
+    var str = `<tr id='devices_tr_${device.mac}'>
         <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">${device.vendor}</a></td>
         <td>${device.ip}</td>
         <td>${device.mac}</td>
-        <td>`
-        //Check if it is a registered device to place corresponding icon.
-        +
-        ("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0 ? "<i class='fas fa-shield-alt'></i>" : "<i class='fas fa-exclamation-triangle'></i>") +
-    `</td>
+        <td>${faicon}</td>
         <td>
           <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
