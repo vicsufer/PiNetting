@@ -26,7 +26,7 @@ socket.on('connected_devices', function(data) {
           <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down fa-2x"></i></button>
             <ul class="dropdown-menu">
-              <li><a onclick="doPing('${device.ip}')">Ping</a></li>
+              <li><a onclick="doPing('${device.ip}','${device.mac}')">Ping</a></li>
               <li><a onclick="register('${device.mac}','${device.ip}','${device.vendor}')"> Guardar</a></li>
             </ul>
           </div>
@@ -110,7 +110,7 @@ function unregister(mac) {
   })
 }
 
-function doPing(ip) {
+function doPing(ip, mac) {
   //Setup loading icon.
   $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
 

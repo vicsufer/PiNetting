@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <title>Gestor de dispositivos</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
@@ -21,7 +23,7 @@
 
   <h1 class="text-center">Gestor Dispositivos</h1>
 
-  <div class="container">
+  <div class="container-fluid">
     <h2>Dispositivos registrados</h2>
     <table id="registered-devices" class="table table-responsive table-hover">
       <thead>
@@ -53,7 +55,7 @@
     </table>
   </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <h2>Dispositivos conectados</h2>
     <div class="container-fluid">
       <table id="connected-devices" class="table table-responsive table-hover">
@@ -78,7 +80,7 @@
   <footer class="page-footer font-small pt-4">
 
     <!-- Footer Elements -->
-    <div class="container">
+    <div class="container-fluid">
 
       <!-- Social buttons -->
       <ul class="list-unstyled list-inline text-center">
