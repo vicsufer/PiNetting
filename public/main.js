@@ -41,16 +41,17 @@ socket.on('connected_devices', function(data) {
 });
 
 
-function changeType(e) {
-  var e = window.event || e;
-  var source = e.target || e.srcElement
-  if ($(source).attr('class').indexOf("unknown") >= 0) {
-    $(source).attr('class', "fas fa-shield-alt known")
+function
+switch (mac, ip) {
+
+  if ($('#registered-devices tr[id='
+      devices_tr_ " + mac + "
+      '] input[type="checkbox"]').is(":checked")) {
+    $('#modal-shutdown').modal('show')
   } else {
-    $(source).attr('class', "fa fa-question unknown")
+    wakeup(mac)
   }
 }
-
 
 function register(mac, ip, vendor) {
   $.ajax({
@@ -68,7 +69,7 @@ function register(mac, ip, vendor) {
         <td>${mac}</td>
         <td>
           <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" onclick="switch('${mac}','${ip}')">
             <span class="slider round"></span>
           </label>
         </td>
@@ -110,8 +111,60 @@ function doPing(ip) {
 
 }
 
+function wakeup(mac) {
+  $.ajax({
+    url: '/wakeup',
+    type: "GET",
+    data: {
+      mac: mac
+    },
+    success: function(result) {
+      //Set the switch on
+      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
+      //Disable it for 10s
+      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', false)
+      setTimeout(function() {
+        $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', true)
+      }, 10000)
+    },
+    error: function(xhr, resp, text) {
+      console.log(xhr, resp, text);
+    }
+  })
+}
+
+function shutdown() {
+  $.ajax({
+    url: '/shutdown',
+    type: "GET",
+    data: {
+      ip: $('#ip').val(),
+      username: $('#fusername').val()
+      password: $('#fpassword').val(),
+    },
+    success: function(result) {
+      //Set the switch off
+      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', false)
+      //Disable it for 10s
+      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', false)
+      setTimeout(function() {
+        $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', true)
+      }, 10000)
+    },
+    error: function(xhr, resp, text) {
+      console.log(xhr, resp, text);
+    }
+  })
+}
 
 $(document).ready(function() {
   $('.device_name').editable();
   $('#modal-ping').modal('hide')
+  $('#modal-shutdown').modal('hide')
+  $('#form-shutdown').on('submit', function(e) {
+      e.preventDefault();
+      $('#modal-shutdown').modal('hide')
+      shutdown();
+    }
+  });
 });

@@ -30,6 +30,50 @@ module.exports = function(app, child_process, io, gestorBD) {
     }
   });
 
+  app.get('/wakeup', function(req, res) {
+    if (validateIPAddress(req.query.ip)) {
+      var command = "wakeonlan -i 192.168.0.255 " + req.query.mac
+      var dir = child_process.exec(command, function(err, stdout, stderr) {
+        if (err) {
+          res.status(500);
+          res.send()
+        } else {
+          res.status(200);
+          res.send({
+            message: "OK"
+          });
+        }
+      });
+    } else {
+      res.status(422);
+      res.send({
+        message: "Invalid IP address format"
+      })
+    }
+  });
+
+  app.get('/shutdown', function(req, res) {
+    if (validateIPAddress(req.query.ip)) {
+      var command = `net rpc - S ${req.query.ip} -U ${req.query.username}%${req.query.password} -t 1 -f`
+      var dir = child_process.exec(command, function(err, stdout, stderr) {
+        if (err) {
+          res.status(500);
+          res.send()
+        } else {
+          res.status(200);
+          res.send({
+            message: "OK"
+          });
+        }
+      });
+    } else {
+      res.status(422);
+      res.send({
+        message: "Invalid data"
+      })
+    }
+  });
+
   //Setup discovery
   setInterval(function() {
     var command = "sudo nmap -sP -PR -n --max-retries 4 192.168.0.1/24"
