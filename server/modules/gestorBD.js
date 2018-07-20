@@ -34,7 +34,7 @@ module.exports = {
           if (err) {
             funcionCallback(err);
           } else {
-            funcionCallback(null, result.ops[0]._id);
+            funcionCallback(null, {message: "OK"});
           }
           db.close();
         });
