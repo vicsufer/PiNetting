@@ -46,7 +46,7 @@ function switch_device(mac) {
 
   if ($("#registered-devices tr[id='devices_tr_" + mac + "'] input[type='checkbox']").is(':checked')) {
     $('#fip').val(ip)
-    $('#fip').val(mac)
+    $('#fmac').val(mac)
     $('#modal-shutdown').modal('show')
   } else {
     wakeup(mac)
