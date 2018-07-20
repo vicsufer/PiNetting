@@ -4,13 +4,18 @@ var socket = io.connect("http://192.168.0.2:5000", {
 
 socket.on('disconnected_devices', function(data) {
   data.forEach(function(mac) {
-    $("tr[id='devices_tr_" + mac + "']").remove();
+    //Remove device from connected devices table
+    $(".connected-devices tr[id='devices_tr_" + mac + "']").remove();
+    //If it is regiseres set the switch off.
+    $(".connected-devices tr[id='devices_tr_" + mac + " input']").prop('checked', false)
   })
 
 });
 
 socket.on('connected_devices', function(data) {
   data.forEach(function(device) {
+    var mac = device.mac
+    //Create HTML code for new connected device
     var str = `<tr id='devices_tr_${device.mac}'>
         <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">${device.vendor}</a></td>
         <td>${device.ip}</td>
@@ -28,6 +33,8 @@ socket.on('connected_devices', function(data) {
         </td>
       </tr>`
     $("#connected-devices").append(str)
+    //If the device is registered set the switch on
+    $(".connected-devices tr[id='devices_tr_" + mac + " input']").prop('checked', true)
   })
 
 });

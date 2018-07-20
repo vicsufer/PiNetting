@@ -72,7 +72,7 @@
           <th scope="col">Estado</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="registered-devices">
 
         [[ for (var device in model.registered_devices){ ]]
         <tr id='devices_tr_[[= model.registered_devices[device].mac]]'>
