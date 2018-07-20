@@ -139,6 +139,9 @@ http.listen(app.get('port'), function() {
 
 
 io.on('connection', function(socket) {
+
+  socket.emit('connected_devices', app.get('devices'));
+  
   logger.log({
     level: "verbose",
     label: 'Connection',

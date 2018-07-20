@@ -75,7 +75,7 @@ function register(mac, ip, vendor) {
       </tr>`
       $("#registered-devices").append(str)
       //Set the switch on
-      $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true)
+      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);

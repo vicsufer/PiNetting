@@ -11,7 +11,6 @@ module.exports = function(app, gestorBD) {
         });
       } else {
         res.render('main', {
-          devices: app.get("devices"),
           registered_devices: registered_devices
         });
       }
