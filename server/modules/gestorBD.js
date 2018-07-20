@@ -24,6 +24,24 @@ module.exports = {
     });
   },
 
+  unregisterDevice: function(device, funcionCallback) {
+    this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+      if (err) {
+        funcionCallback(err);
+      } else {
+        var collection = db.collection('registered_devices');
+        collection.remove(device, function(err, result) {
+          if (err) {
+            funcionCallback(err);
+          } else {
+            funcionCallback(null, result.ops[0]._id);
+          }
+          db.close();
+        });
+      }
+    });
+  },
+
   updateRegisteredDevice: function(criteria, device, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
       if (err) {

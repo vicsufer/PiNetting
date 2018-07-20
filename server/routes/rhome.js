@@ -65,4 +65,25 @@ module.exports = function(app, gestorBD) {
 
   });
 
+  //DELETE
+  app.delete('/unregister', function(req, res) {
+    device = {
+      mac: req.body.mac,
+    }
+
+    gestorBD.registerDevice(device, function(err, result) {
+      if (err) {
+        res.status(500)
+        res.send({
+          message: "Unable to unregister"
+        })
+      } else {
+        res.status(200)
+        res.send({
+          message: "OK"
+        })
+      }
+    })
+  });
+
 }

@@ -30,6 +30,7 @@
           <th scope="col">IP</th>
           <th scope="col">MAC</th>
           <th scope="col">Estado</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +38,7 @@
         [[ for (var device in model.registered_devices){ ]]
         <tr id='devices_tr_[[= model.registered_devices[device].mac]]'>
           <td><a href="#" data-pk="[[=model.registered_devices[device].mac]]" class="device_name" data-type="text" data-url="/rename" data-title="Nombre del dispositivo">[[= model.registered_devices[device].name ]]</a></td>
-          <td>[[= model.registered_devices[device].ip ]]</td>
+          <td></td>
           <td>[[= model.registered_devices[device].mac ]]</td>
           <td>
             <label class="switch">
@@ -45,6 +46,7 @@
               <span class="slider round" onclick="switch_device('[[=model.registered_devices[device].mac]]')"></span>
             </label>
           </td>
+          <td><i class="fas fa-trash-alt" onclick="unregister('[[=model.registered_devices[device].mac]]')"></i></td>
         </tr>
         [[ } ]]
       </tbody>
@@ -159,6 +161,7 @@
       <div class="modal-body">
         <form id="form-shutdown" class="form-horizontal">
           <input type="text" class="invisible"class="form-control" id="fip">
+          <input type="text" class="invisible"class="form-control" id="fmac">
           <div class="form-group">
             <label class="control-label col-sm-2" for="fusername">Usuario:</label>
             <div class="col-sm-10">

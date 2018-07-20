@@ -46,6 +46,7 @@ function switch_device(mac) {
 
   if ($("#registered-devices tr[id='devices_tr_" + mac + "'] input[type='checkbox']").is(':checked')) {
     $('#fip').val(ip)
+    $('#fip').val(mac)
     $('#modal-shutdown').modal('show')
   } else {
     wakeup(mac)
@@ -76,6 +77,27 @@ function register(mac, ip, vendor) {
       $("#registered-devices").append(str)
       //Set the switch on
       $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
+      //Add safe icon to connected devices table
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-shield-alt'></i>")
+    },
+    error: function(xhr, resp, text) {
+      console.log(xhr, resp, text);
+    }
+  })
+}
+
+function unregister(mac) {
+  $.ajax({
+    url: '/unregister',
+    type: "DELETE",
+    data: {
+      mac: mac
+    },
+    success: function(result) {
+      //Remove from registered devices table.
+      $("#registered-devices tr[id='devices_tr_" + mac + "']").remove()
+      //If it is connected change icon to unknown
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-exclamation-triangle'></i>")
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -143,11 +165,11 @@ function shutdown() {
     },
     success: function(result) {
       //Set the switch off
-      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', false)
+      $("#registered-devices tr[id='devices_tr_" + $('#fmac').val() + "'] input").prop('checked', false)
       //Disable it for 10s
-      $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', false)
+      $("#registered-devices tr[id='devices_tr_" + $('#fmac').val() + "'] input").prop('enabled', false)
       setTimeout(function() {
-        $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('enabled', true)
+        $("#registered-devices tr[id='devices_tr_" + $('#fmac').val() + "'] input").prop('enabled', true)
       }, 10000)
     },
     error: function(xhr, resp, text) {
