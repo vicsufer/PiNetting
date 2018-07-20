@@ -46,7 +46,7 @@
               <span class="slider round" onclick="switch_device('[[=model.registered_devices[device].mac]]')"></span>
             </label>
           </td>
-          <td><i class="fas fa-trash-alt" onclick="unregister('[[=model.registered_devices[device].mac]]')"></i></td>
+          <td><i class="fas fa-trash-alt fa-2x" onclick="unregister('[[=model.registered_devices[device].mac]]')"></i></td>
         </tr>
         [[ } ]]
       </tbody>

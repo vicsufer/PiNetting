@@ -16,7 +16,7 @@ socket.on('disconnected_devices', function(data) {
 socket.on('connected_devices', function(data) {
   data.forEach(function(device) {
     //Create HTML code for new connected device
-    var faicon = ($("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0 ? "<i class='fas fa-shield-alt'></i>" : "<i class='fas fa-exclamation-triangle'></i>")
+    var faicon = ($("#registered-devices tr[id='devices_tr_" + device.mac + "']").length > 0 ? "<i class='fas fa-shield-alt fa-2x'></i>" : "<i class='fas fa-exclamation-triangle fa-2x'></i>")
     var str = `<tr id='devices_tr_${device.mac}'>
         <td><a href="#" class="device_name" data-type="text" data-title="Nombre del dispositivo">${device.vendor}</a></td>
         <td>${device.ip}</td>
@@ -24,7 +24,7 @@ socket.on('connected_devices', function(data) {
         <td>${faicon}</td>
         <td>
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down fa-2x"></i></button>
             <ul class="dropdown-menu">
               <li><a onclick="doPing('${device.ip}')">Ping</a></li>
               <li><a onclick="register('${device.mac}','${device.ip}','${device.vendor}')"> Guardar</a></li>
@@ -78,7 +78,7 @@ function register(mac, ip, vendor) {
       //Set the switch on
       $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
       //Add safe icon to connected devices table
-      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-shield-alt'></i>")
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-shield-alt fa-2x'></i>")
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -97,7 +97,7 @@ function unregister(mac) {
       //Remove from registered devices table.
       $("#registered-devices tr[id='devices_tr_" + mac + "']").remove()
       //If it is connected change icon to unknown
-      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-exclamation-triangle'></i>")
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-exclamation-triangle fa-2x'></i>")
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -127,7 +127,7 @@ function doPing(ip) {
     $('#ping_max').html(response.max)
     $('#ping_avg').html(response.avg)
     $('#modal-ping').modal('show')
-    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
+    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down fa-2x")
   });
 
 }
