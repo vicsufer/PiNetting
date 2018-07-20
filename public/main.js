@@ -83,7 +83,9 @@ function register(mac, ip, vendor) {
       //Add safe icon to connected devices table
       $("#connected-devices tr[id='devices_tr_" + mac + "'] td").eq(3).html("<i class='fas fa-shield-alt fa-2x'></i>")
       //Allow editable name
-      $('.device_name').editable();
+      $('.device_name').editable({
+        mode: 'inline',
+      });
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -184,7 +186,9 @@ function shutdown() {
 }
 
 $(document).ready(function() {
-  $('.device_name').editable();
+  $('.device_name').editable({
+    mode: 'inline',
+  });
   $('#modal-ping').modal('hide')
   $('#modal-shutdown').modal('hide')
   $('#form-shutdown').on('submit', function(e) {
