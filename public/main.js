@@ -32,9 +32,10 @@ socket.on('connected_devices', function(data) {
           </div>
         </td>
       </tr>`
-    $("#connected-devices").append(str)
+    $("#connected-devices").append(str);
     //If the device is registered set the switch on and the IP
-    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true) $("#registered-devices tr[id='devices_tr_" + device.mac + "'] td").eq(1).html(device.ip)
+    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true);
+    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] td").eq(1).html(device.ip);
   })
 
 });
