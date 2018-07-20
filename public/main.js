@@ -70,10 +70,12 @@ function register(mac, ip, vendor) {
         <td>
           <label class="switch">
             <input type="checkbox">
-            <span class="slider round" checked onclick="switch_device('${mac}')></span>
+            <span class="slider round" checked onclick="switch_device('${mac}')"></span>
           </label>
         </td>
-        <td><i class="fas fa-trash-alt fa-2x" onclick="unregister('${mac}')"></i></td>
+        <td>
+          <i class="fas fa-trash-alt fa-2x" onclick="unregister('${mac}')"></i>
+        </td>
       </tr>`
       $("#registered-devices").append(str)
       //Set the switch on
