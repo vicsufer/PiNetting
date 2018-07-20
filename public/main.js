@@ -69,7 +69,7 @@ function register(mac, ip, vendor) {
         <td>${mac}</td>
         <td>
           <label class="switch">
-            <input type="checkbox" checked">
+            <input type="checkbox" checked>
             <span class="slider round" onclick="switch_device('${mac}')></span>
           </label>
         </td>
