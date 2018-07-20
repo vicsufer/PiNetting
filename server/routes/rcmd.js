@@ -48,9 +48,10 @@ module.exports = function(app, child_process, io, gestorBD) {
 
   app.get('/shutdown', function(req, res) {
     if (validateIPAddress(req.query.ip)) {
-      var command = `net rpc - S ${req.query.ip} -U ${req.query.username}%${req.query.password} -t 1 -f`
+      var command = `sudo net rpc - S ${req.query.ip} -U ${req.query.username}%${req.query.password} -t 1 -f`
       var dir = child_process.exec(command, function(err, stdout, stderr) {
         if (err) {
+          console.log(err)
           res.status(500);
           res.send()
         } else {
