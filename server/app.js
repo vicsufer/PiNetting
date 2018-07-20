@@ -36,26 +36,7 @@ const logger = winstonLog.logger;
 
 require("./routes/rhome.js")(app, gestorBD);
 require("./routes/rcmd.js")(app, child_process, io, gestorBD);
-/*
-//Network tools
-const nmap = require('libnmap');
-const opts = {
-  range: [
-    '192.168.0.0/25',
-  ]
-};
 
-
-nmap.scan(opts, function(err, report) {
-  console.log("hola")
-  if (err) throw new Error(err);
-
-  for (let item in report) {
-    console.log(report[item])
-    //console.log(JSON.stringify(report[item]));
-  }
-});
-*/
 
 //Public folder
 app.use(express.static('public'));
