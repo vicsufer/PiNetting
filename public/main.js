@@ -69,17 +69,15 @@ function register(mac, ip, vendor) {
         <td>${mac}</td>
         <td>
           <label class="switch">
-            <input type="checkbox" onclick="switch_device('${mac}')">
+            <input type="checkbox" checked onclick="switch_device('${mac}')">
             <span class="slider round"></span>
           </label>
         </td>
         <td><i class="fas fa-trash-alt fa-2x" onclick="unregister('${mac}')"></i></td>
       </tr>`
       $("#registered-devices").append(str)
-      //Set the switch on
-      $("#registered-devices tr[id='devices_tr_" + mac + "'] input[type='checkbox']").prop('checked', true);
       //Add safe icon to connected devices table
-      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-shield-alt fa-2x'></i>")
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] td").eq(3).html("<i class='fas fa-shield-alt fa-2x'></i>")
       //Allow editable name
       $('.device_name').editable();
     },
