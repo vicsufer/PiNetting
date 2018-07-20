@@ -79,6 +79,8 @@ function register(mac, ip, vendor) {
       $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', true)
       //Add safe icon to connected devices table
       $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-shield-alt fa-2x'></i>")
+      //Allow editable name
+      $('.device_name').editable();
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -97,7 +99,7 @@ function unregister(mac) {
       //Remove from registered devices table.
       $("#registered-devices tr[id='devices_tr_" + mac + "']").remove()
       //If it is connected change icon to unknown
-      $("#connected-devices tr[id='devices_tr_" + mac + "'] rd").eq(3).html("<i class='fas fa-exclamation-triangle fa-2x'></i>")
+      $("#connected-devices tr[id='devices_tr_" + mac + "'] td").eq(3).html("<i class='fas fa-exclamation-triangle fa-2x'></i>")
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
