@@ -81,9 +81,9 @@ module.exports = function(app, child_process, io, gestorBD) {
 
       stdout = stdout.split("\n")
       stdout.shift() //Remove header of the output
-      stdout.shift() //Remove header of the output
+      //stdout.shift() //Remove header of the output
       stdout.pop() //Remove summary
-      stdout.pop() //Remove summary
+      //stdout.pop() //Remove summary
       stdout = chunkArray(stdout, 3);
       //Last one is localhost, we don't need that one.
       stdout.pop()
