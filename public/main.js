@@ -43,7 +43,7 @@ socket.on('connected_devices', function(data) {
 
 function switch_device(mac) {
   var ip = $('#registered-devices tr[id=devices_tr_' + mac + "'] td").eq(1).html()
-  
+
   if ($('#registered-devices tr[id=devices_tr_' + mac + "'] input[type='checkbox']").is(':checked')) {
     $('#fip').val(ip)
     $('#modal-shutdown').modal('show')
@@ -138,8 +138,8 @@ function shutdown() {
     type: "GET",
     data: {
       ip: $('#ip').val(),
-      username: $('#fusername').val()
-      password: $('#fpassword').val(),
+      username: $('#fusername').val(),
+      password: $('#fpassword').val()
     },
     success: function(result) {
       //Set the switch off
