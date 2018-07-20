@@ -27,7 +27,7 @@ socket.on('connected_devices', function(data) {
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-caret-down"></i></button>
             <ul class="dropdown-menu">
               <li><a onclick="doPing('${device.ip}')">Ping</a></li>
-              <li><a onclick="register('${device.mac}','${device.vendor}')"> Guardar</a></li>
+              <li><a onclick="register('${device.mac}','${device.ip}','${device.vendor}')"> Guardar</a></li>
             </ul>
           </div>
         </td>
@@ -52,7 +52,7 @@ function changeType(e) {
 }
 
 
-function register(mac, vendor) {
+function register(mac, ip, vendor) {
   $.ajax({
     url: '/register',
     type: "POST",
@@ -61,7 +61,21 @@ function register(mac, vendor) {
       vendor: vendor
     },
     success: function(result) {
-      console.log(result);
+      //Add registered device to table of registered devices
+      var str = `<tr id='devices_tr_${mac}'>
+        <td><a href="#" data-pk="${mac}" class="device_name" data-type="text" data-url="/rename" data-title="Nombre del dispositivo">${vendor}</a></td>
+        <td>${ip}</td>
+        <td>${mac}</td>
+        <td>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </td>
+      </tr>`
+      $("#registered-devices").append(str)
+      //Set the switch on
+      $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true)
     },
     error: function(xhr, resp, text) {
       console.log(xhr, resp, text);
@@ -70,6 +84,9 @@ function register(mac, vendor) {
 }
 
 function doPing(ip) {
+  //Setup loading icon.
+  $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
+
   var settings = {
     "async": true,
     "url": "/ping",
@@ -82,15 +99,15 @@ function doPing(ip) {
     }
   }
   $.ajax(settings).done(function(response) {
+    //Set modal data.
     $('#ping_ip').html(response.ip)
     $('#ping_min').html(response.min)
     $('#ping_max').html(response.max)
     $('#ping_avg').html(response.avg)
     $('#modal-ping').modal('show')
-    //$("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
+    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down")
   });
 
-  //$("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
 }
 
 
