@@ -100,3 +100,13 @@ input:checked+.slider:before {
     padding-right: 10px;
     white-space: nowrap;
   }
+
+  #registered-devices td:nth-of-type(1):before { content: "Nombre"; }
+  #registered-devices td:nth-of-type(2):before { content: "IP"; }
+  #registered-devices td:nth-of-type(3):before { content: "MAC"; }
+  #registered-devices td:nth-of-type(4):before { content: "Estado"; }
+
+  #connected-devices td:nth-of-type(1):before { content: "Fabricante"; }
+  #connected-devices td:nth-of-type(2):before { content: "IP"; }
+  #connected-devices td:nth-of-type(3):before { content: "Tipo"; }
+  #connected-devices td:nth-of-type(4):before { content: "Acciones"; }
