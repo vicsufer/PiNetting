@@ -137,7 +137,7 @@ function shutdown() {
     url: '/shutdown',
     type: "GET",
     data: {
-      ip: $('#ip').val(),
+      ip: $('#fip').val(),
       username: $('#fusername').val(),
       password: $('#fpassword').val()
     },

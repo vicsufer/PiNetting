@@ -158,7 +158,7 @@
       </div>
       <div class="modal-body">
         <form id="form-shutdown" class="form-horizontal">
-          <input type="text" class="form-control" id="fip" hidden>
+          <input type="text" class="invisible"class="form-control" id="fip">
           <div class="form-group">
             <label class="control-label col-sm-2" for="fusername">Usuario:</label>
             <div class="col-sm-10">
@@ -173,8 +173,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-10">
-              <input type="submit" />
-              <input type="submit" class="form-control" value="Apagar">
+              <input type="submit" class="btn btn-primary" value="Apagar">
             </div>
           </div>
         </form>
