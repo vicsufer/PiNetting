@@ -1,17 +1,26 @@
 {
-  "name": "node-chat",
-  "version": "0.3.0",
-  "description": "Chat via websockets.",
+  "name": "Pinetting",
+  "version": "0.9.0",
+  "description": "Module that allows to discover devices in a network and manage them (WakeOnLan and shutdown).",
   "main": "server/app.js",
-  "scripts": {
-    "start": "NODE_ENV=dev sudo nodemon ./server/app.js"
+  "config": {
+    "port":5000,
+    "iprange": "192.168.0.1/24"
   },
-  "author": "Víctor Suárez Fernández",
+  "scripts": {
+    "start": "sudo node ./server/app.js"
+  },
+  "author": {
+    "name": "Víctor Suárez Fernández",
+    "email": "vicsufer@gmail.com",
+    "url": "https://www.linkedin.com/in/vicsufer"
+  },
+  "homepage": "https://github.com/ByBordex/PiNetting#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bordex/node-chat"
+    "url": "https://github.com/bordex/PiNetting"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
