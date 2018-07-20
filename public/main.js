@@ -8,7 +8,7 @@ socket.on('disconnected_devices', function(data) {
     $("#connected-devices tr[id='devices_tr_" + mac + "']").remove();
     //If it is regiseres set the switch off and delete the IP
     $("#registered-devices tr[id='devices_tr_" + mac + "'] input").prop('checked', false)
-    $("#registered-devices tr[id='devices_tr_" + mac + "'] td")[1].html("")
+    $("#registered-devices tr[id='devices_tr_" + mac + "'] td").eq(1).html("")
   })
 
 });
@@ -35,7 +35,7 @@ socket.on('connected_devices', function(data) {
     $("#connected-devices").append(str)
     //If the device is registered set the switch on and the IP
     $("#registered-devices tr[id='devices_tr_" + device.mac + "'] input").prop('checked', true)
-    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] td")[1].html( device.ip )
+    $("#registered-devices tr[id='devices_tr_" + device.mac + "'] td").eq(1).html( device.ip )
   })
 
 });
