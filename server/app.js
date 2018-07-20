@@ -57,77 +57,17 @@ nmap.scan(opts, function(err, report) {
 });
 */
 
+//Public folder
+app.use(express.static('public'));
+
 //Variables
 app.set('port', 5000);
 app.set('devices', []);
 
-app.use(express.static('public'));
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'dot');
 
-/*
-//Elasticserach
-var elastic = require('./modules/elasticsearch.js');
-if (!elastic.indexExists()) {
-  elastic.initIndex();
-  elastic.initMapping();
-}
-
-elastic.initMapping(function(err, resp, status) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(resp);
-  }
-})
-
-devices = []
-setInterval(function() {
-  local().then(found_devices => {
-
-    found_devices.forEach(function(device) {
-      //If device is not in the list log the new connection.
-      if( devices.map(x=>x.mac).indexOf(device.mac) <0 )
-      {
-        logger.transports[2].silent = false
-        logger.log({
-          level: 'verbose',
-          label: 'CONNECTION',
-          message: JSON.stringify(device)
-        });
-        logger.transports['2'].silent = true // turns off
-        devices.push(device);
-      }
-    });
-    //console.log(devices.map(x=>x.mac))
-    //console.log(found_devices.map(x=>x.mac))
-    //Get difference of new and current devices
-    disconnected = devices.filter( dev => found_devices.map(x=>x.mac).indexOf(dev.mac) < 0 );
-    console.log(disconnected)
-    disconnected.forEach(function(device) {
-      logger.transports[2].silent = false
-      logger.log({
-        level: 'verbose',
-        label: 'DISCONNECTION',
-        message: JSON.stringify(device)
-      });
-      logger.transports['2'].silent = true // turns off
-    });
-
-    devices = found_devices
-  });
-  /*
-  [
-    { name: '?', ip: '192.168.0.10', mac: '...' },
-    { name: '...', ip: '192.168.0.17', mac: '...' },
-    { name: '...', ip: '192.168.0.21', mac: '...' },
-    { name: '...', ip: '192.168.0.22', mac: '...' }
-  ]
-
-
-}, 500);
-*/
 
 http.listen(app.get('port'), function() {
   logger.log({
@@ -141,7 +81,7 @@ http.listen(app.get('port'), function() {
 io.on('connection', function(socket) {
 
   socket.emit('connected_devices', app.get('devices'));
-  
+
   logger.log({
     level: "verbose",
     label: 'Connection',
