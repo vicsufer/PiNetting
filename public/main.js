@@ -7,7 +7,8 @@ socket.on('disconnected_devices', function(data) {
     //Remove device from connected devices table
     $(".connected-devices tr[id='devices_tr_" + mac + "']").remove();
     //If it is regiseres set the switch off.
-    $(".connected-devices tr[id='devices_tr_" + mac + " input']").prop('checked', false)
+    console.log($(".connected-devices tr[id='devices_tr_" + mac + " td label input']"))
+    $(".connected-devices tr[id='devices_tr_" + mac + " td label input']").prop('checked', false)
   })
 
 });
