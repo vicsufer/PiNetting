@@ -161,9 +161,8 @@ $(document).ready(function() {
   $('#modal-ping').modal('hide')
   $('#modal-shutdown').modal('hide')
   $('#form-shutdown').on('submit', function(e) {
-      e.preventDefault();
-      $('#modal-shutdown').modal('hide')
-      shutdown();
-    }
+    e.preventDefault();
+    $('#modal-shutdown').modal('hide')
+    shutdown();
   });
 });
