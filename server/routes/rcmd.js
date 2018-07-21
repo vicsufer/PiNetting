@@ -72,7 +72,7 @@ module.exports = function(app, child_process, io, gestorBD) {
   //Perform discovery scan, time slices are specified in environmental variables.
   setInterval(function() {
     //Launch nmap
-    var command = "sudo nmap -sP -PR -n --max-retries 4 192.168.0.1/24"// + process.env.npm_package_config_iprange
+    var command = "sudo nmap -sP -PR -n --max-retries 4 " + process.env.npm_package_config_iprange
     var dir = child_process.exec(command, function(err, stdout, stderr) {
       //Get output and parse
       stdout = stdout.split("\n") //Split output in lines.
@@ -111,7 +111,7 @@ module.exports = function(app, child_process, io, gestorBD) {
       }
     });
 
-  }, process.env.npm_pinneting_config_scanfrequency);
+  }, process.env.npm_package_config_scanfrequency);
 
   //Utils
   function validateIPAddress(ipaddress) {
