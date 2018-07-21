@@ -1,7 +1,3 @@
-var socket = io.connect("http://192.168.0.2:5000", {
-  'forceNew': true
-});
-
 socket.on('disconnected_devices', function(data) {
   data.forEach(function(mac) {
     //Remove device from connected devices table

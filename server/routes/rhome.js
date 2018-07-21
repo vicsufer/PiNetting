@@ -2,16 +2,17 @@ module.exports = function(app, gestorBD) {
 
   //GET
   app.get('/', function(req, res) {
-
+    var host = `${process.env.npm_package_config_hostip}:${process.env.npm_package_config_post}`
     gestorBD.getRegisteredDevices({}, function(err, registered_devices) {
       if (err) {
         res.render('main', {
-          devices: app.get("devices"),
-          registered_devices: []
+          registered_devices: [],
+          hostaddress: host
         });
       } else {
         res.render('main', {
-          registered_devices: registered_devices
+          registered_devices: registered_devices,
+          hostaddress: host
         });
       }
     })
@@ -38,7 +39,6 @@ module.exports = function(app, gestorBD) {
         })
       }
     })
-
   });
 
   //POST
@@ -70,7 +70,6 @@ module.exports = function(app, gestorBD) {
     device = {
       mac: req.body.mac,
     }
-
     gestorBD.unregisterDevice(device, function(err, result) {
       if (err) {
         res.status(500)

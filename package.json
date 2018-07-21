@@ -1,14 +1,18 @@
 {
-  "name": "Pinetting",
+  "name": "pinetting",
   "version": "0.9.0",
   "description": "Module that allows to discover devices in a network and manage them (WakeOnLan and shutdown).",
   "main": "server/app.js",
   "config": {
     "port":5000,
-    "iprange": "192.168.0.1/24"
+    "iprange": "192.168.0.1/24",
+    "hostip": "192.168.0.2",
+    "scanfrequency": 4000,
+    "mongodb": "mongodb://localhost:27017/network_devices"
   },
   "scripts": {
-    "start": "sudo node ./server/app.js"
+    "start": "node ./server/app.js",
+    "start:dev" : "sudo nodemon ./server/app.js"
   },
   "author": {
     "name": "Víctor Suárez Fernández",
