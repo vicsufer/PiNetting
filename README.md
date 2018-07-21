@@ -37,7 +37,9 @@ The can be installed by means of aptitude package manager.
 $ git clone https://github.com/ByBordex/PiNetting.git
 $ cd PiNetting
 $ npm install
+$ mkdir logs
 ```
+If the log folder is not created activity logs will not be stored.
 ### Configuration
 PiNetting uses several envirnonmental variables located in the pakage.json file and which can be tweaked:
   - hostip: IP Of the device where PiNetting will be running.
