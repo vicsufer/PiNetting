@@ -1,7 +1,12 @@
-module.exports = function(app, child_process, io, gestorBD) {
+module.exports = function(app, child_process, io, gestorBD, logger) {
 
   //GET
   app.get('/ping', function(req, res) {
+    logger.log({
+      level: 'verbose',
+      label: 'Ping',
+      message: 'Ping request to ' + req.query.ip
+    });
     if (validateIPAddress(req.query.ip)) {
       var command = "ping -c 4 " + req.query.ip
       var dir = child_process.exec(command, function(err, stdout, stderr) {
@@ -31,6 +36,11 @@ module.exports = function(app, child_process, io, gestorBD) {
   });
 
   app.get('/wakeup', function(req, res) {
+    logger.log({
+      level: 'verbose',
+      label: 'WakeOnLan',
+      message: 'WakeOnLan request to ' + req.query.mac
+    });
     var command = "wakeonlan -i 192.168.0.255 " + req.query.mac
     var dir = child_process.exec(command, function(err, stdout, stderr) {
       if (err) {
@@ -47,6 +57,11 @@ module.exports = function(app, child_process, io, gestorBD) {
   });
 
   app.get('/shutdown', function(req, res) {
+    logger.log({
+      level: 'verbose',
+      label: 'Shutdown',
+      message: 'Shutdown request to ' + req.query.ip + " via user: " + req.query.username
+    });
     if (validateIPAddress(req.query.ip)) {
       var command = `sudo net rpc -S ${req.query.ip} -U ${req.query.username}%${req.query.password} shutdown -t 1 -f`
       var dir = child_process.exec(command, function(err, stdout, stderr) {
@@ -99,10 +114,29 @@ module.exports = function(app, child_process, io, gestorBD) {
       let disconnected_mac = app.get("devices").map(x => x.mac).filter(x => !devices.map(y => y.mac).includes(x));
 
       //If any changes report them to the sockets.
-      if (connected != [])
+      if (connected != []) {
         io.sockets.emit('connected_devices', connected);
-      if (disconnected_mac != [])
+        //Log the connections
+        connected.forEach(function(device) {
+          logger.log({
+            level: 'verbose',
+            label: 'Connect',
+            message: JSON.stringify(device)
+          });
+        })
+      }
+
+      if (disconnected_mac != []) {
         io.sockets.emit('disconnected_devices', disconnected_mac);
+        //Log disconnected devices
+        disconnected_mac.forEach(function(device) {
+          logger.log({
+            level: 'verbose',
+            label: 'Disconnect',
+            message: JSON.stringify(device)
+          });
+        })
+      }
       //Set device in this scan as the current connected in the whole app.
       app.set("devices", devices)
 

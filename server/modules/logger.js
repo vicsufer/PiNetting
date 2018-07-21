@@ -34,13 +34,6 @@ module.exports = {
           filename: './logs/combined.log',
           level: 'debug',
           json: true
-        }),
-        new winston.transports.File({
-          name: 'devices',
-          filename: './logs/devices.log',
-          level: 'verbose',
-          json: true,
-          silent: true
         })
       ]
     });

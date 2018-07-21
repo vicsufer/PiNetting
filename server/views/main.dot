@@ -23,7 +23,7 @@
     });
   </script>
   <script src="main.js"></script>
-  
+
 </head>
 
 <body>
@@ -92,12 +92,12 @@
       <!-- Social buttons -->
       <ul class="list-unstyled list-inline text-center">
         <li class="list-inline-item">
-          <a hred="https://twitter.com/vicbordex" class="btn-floating btn-tw mx-1">
+          <a href="https://twitter.com/vicbordex" class="btn-floating btn-tw mx-1">
               <i class="fab fa-twitter fa-3x"> </i>
             </a>
         </li>
         <li class="list-inline-item">
-          <a hred="https://www.linkedin.com/in/vicsufer/" class="btn-floating btn-li mx-1">
+          <a href"https://www.linkedin.com/in/vicsufer/" class="btn-floating btn-li mx-1">
               <i class="fab fa-linkedin fa-3x"> </i>
             </a>
         </li>

@@ -1,4 +1,4 @@
-module.exports = function(app, gestorBD) {
+module.exports = function(app, gestorBD, logger) {
 
   //GET
   app.get('/', function(req, res) {
@@ -26,6 +26,12 @@ module.exports = function(app, gestorBD) {
       mac: req.body.mac,
     }
 
+    logger.log({
+      level: 'verbose',
+      label: 'Register',
+      message: 'Registration request for ' + req.body.mac
+    });
+
     gestorBD.registerDevice(device, function(err, result) {
       if (err) {
         res.status(500)
@@ -43,6 +49,13 @@ module.exports = function(app, gestorBD) {
 
   //POST
   app.post('/rename', function(req, res) {
+
+    logger.log({
+      level: 'verbose',
+      label: 'Rename',
+      message: 'Renaming request for ' + req.body.pk + " to " + req.body.value
+    });
+
     gestorBD.updateRegisteredDevice({
       mac: req.body.pk
     }, {
@@ -67,6 +80,12 @@ module.exports = function(app, gestorBD) {
 
   //DELETE
   app.delete('/unregister', function(req, res) {
+    logger.log({
+      level: 'verbose',
+      label: 'Unregister',
+      message: 'Unregister request for ' + req.body.mac
+    });
+
     device = {
       mac: req.body.mac,
     }

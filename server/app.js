@@ -31,8 +31,8 @@ winstonLog.init(winston);
 const logger = winstonLog.logger;
 
 //Init controllers
-require("./routes/rhome.js")(app, gestorBD);
-require("./routes/rcmd.js")(app, child_process, io, gestorBD);
+require("./routes/rhome.js")(app, gestorBD, logger);
+require("./routes/rcmd.js")(app, child_process, io, gestorBD, logger);
 
 //Public folder
 app.use(express.static('public'));
