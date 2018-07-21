@@ -4,7 +4,7 @@
   "description": "Module that allows to discover devices in a network and manage them (WakeOnLan and shutdown).",
   "main": "server/app.js",
   "config": {
-    "port":5000,
+    "port": 5000,
     "iprange": "192.168.0.1/24",
     "hostip": "192.168.0.2",
     "scanfrequency": 4000,
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node ./server/app.js",
-    "start:dev" : "sudo nodemon ./server/app.js"
+    "start:dev": "sudo nodemon ./server/app.js"
   },
   "author": {
     "name": "Víctor Suárez Fernández",
@@ -36,6 +36,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
-  },
-  "bin": {"pineting" : "server/app.js"}
+  }
 }
