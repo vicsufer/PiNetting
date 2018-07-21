@@ -2,7 +2,7 @@ module.exports = function(app, gestorBD) {
 
   //GET
   app.get('/', function(req, res) {
-    var host = `${process.env.npm_package_config_hostip}:${process.env.npm_package_config_post}`
+    var host = `${process.env.npm_package_config_hostip}:${process.env.npm_package_config_port}`
     gestorBD.getRegisteredDevices({}, function(err, registered_devices) {
       if (err) {
         res.render('main', {
