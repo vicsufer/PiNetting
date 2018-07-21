@@ -70,7 +70,7 @@ $ npm start
 ```
 
 ## Usage
-Open a web browser and type <hostip>:<port> (Ej: 192.168.0.2:5000) to access the web service.
+Open a web browser and type \<hostip\>:\<port\> (Ej: 192.168.0.2:5000) to access the web service.
 
 ### WakeOnLan & Shutdown
 The devices that will be allowed to perform wakeonlan and remote shutdown must be prepared for it, the method differs depending on the OS.
