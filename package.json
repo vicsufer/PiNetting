@@ -36,5 +36,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
-  }
+  },
+  "bin": {"pinneting" : "server/app.js"}
 }
