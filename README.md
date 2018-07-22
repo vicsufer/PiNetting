@@ -1,6 +1,17 @@
 # PiNetting
 A web service to manage your local network devices.
 
+
+Table of Contents
+=================
+
+  * [Features](#features)
+  * [Setup](#setup)
+    * [Requirements](#requirements)
+    * [Install](#install)
+    * [Run](#run)
+  * [Usage](#usage)
+
 ## Features
    - Monitoring connected devices at local network (IPv4).
    - Register known devices.
@@ -41,7 +52,7 @@ $ mkdir logs
 ```
 If the log folder is not created activity logs will not be stored.
 ### Configuration
-PiNetting uses several envirnonmental variables located in the pakage.json file and which can be tweaked:
+PiNetting uses several environmental variables located in the pakage.json file and which can be tweaked:
   - hostip: IP Of the device where PiNetting will be running.
   - port: Port used for the web service.
   - iprange: Subnetwork in which to perform discovery of devices. Ej: 192.168.0.1/24
@@ -64,7 +75,7 @@ $ npm config set pinetting:<variable> <value>
 ```    
 ### Run
 It is very important to run PiNetting using npm instead of just node since it will load the environmental variables.
-Also it should run with permissions. (Do not use sudo, the password will be prompted a few seconds after the start.)
+Also it should run with permissions. (**Do not use sudo**, the password will be prompted a few seconds after the start.)
 ```sh
 $ npm start
 ```
