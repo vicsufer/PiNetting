@@ -20,7 +20,7 @@ Table of Contents
 
 ## Setup
 
-This steps are intended for a Raspberry Pi3
+PiNetting original idea is to be run on top of a Raspberry Pi3 and so it's configuration is explained for it. However it has been also tested on a MacOS.
 ```sh
 $ uname -a
 Linux raspberrypi 4.14.52-v7+ #1123 SMP Wed Jun 27 17:35:49 BST 2018 armv7l GNU/Linux
