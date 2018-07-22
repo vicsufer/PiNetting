@@ -15,6 +15,7 @@ Table of Contents
 ## Features
    - Monitoring connected devices at local network (IPv4).
    - Register known devices.
+   - Ping devices.
    - WakeOnLan and remote shutdown for registered devices.
    - Activity logs.
 
