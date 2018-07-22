@@ -1,7 +1,7 @@
 {
   "name": "pinetting",
   "version": "1.0.0",
-  "description": "Module that allows to discover devices in a network and manage them (WakeOnLan and shutdown).",
+  "description": "Module that allows to discover devices in a network and manage them (WakeOnLan and remote shutdown).",
   "main": "server/app.js",
   "config": {
     "port": 5000,
