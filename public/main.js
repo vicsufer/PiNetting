@@ -110,7 +110,7 @@ function unregister(mac) {
 
 function doPing(ip, mac) {
   //Setup loading icon.
-  $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
+  $("tr[id='devices_tr_" + mac + "'] td button i").attr("class", "fas fa-spinner fa-refresh fa-spin")
 
   var settings = {
     "async": true,
@@ -130,7 +130,7 @@ function doPing(ip, mac) {
     $('#ping_max').html(response.max)
     $('#ping_avg').html(response.avg)
     $('#modal-ping').modal('show')
-    $("#devices_tr_" + mac + " td button i").attr("class", "fas fa-caret-down fa-2x")
+    $("tr[id='devices_tr_" + mac + "'] td button i").attr("class", "fas fa-caret-down fa-2x")
   });
 
 }

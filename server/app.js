@@ -58,7 +58,7 @@ io.on('connection', function(socket) {
   socket.emit('connected_devices', app.get('devices'));
   logger.log({
     level: "verbose",
-    label: 'Connection',
-    message: 'User connected to socket'
+    label: 'Socket',
+    message: 'An user has connected to the socket.'
   });
 });
