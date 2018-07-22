@@ -88,4 +88,4 @@ The devices that will be allowed to perform wakeonlan and remote shutdown must b
 
 Also notice that WakeOnLan must be supported by the motherboard of the device and can only be performed if it is connected via ethernet.
 
-For shutdown username/password of an account with remote shutdown permissions must be provided.
+For remote shutdown username/password of an account with remote shutdown permissions must be provided.
